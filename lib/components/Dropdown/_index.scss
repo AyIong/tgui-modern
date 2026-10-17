@@ -1,6 +1,8 @@
 @use "@styles/functions" as fn;
 
 .dropdown {
+  --chevron-translate: 37.5%;
+
   display: flex;
   gap: var(--space-m);
 
@@ -12,12 +14,29 @@
     border-right: var(--border-width-2) solid var(--border-color-dark);
   }
 
-  &-chevron {
-    transition: transform var(--transition-time-fast);
+  &-chevrons {
+    display: grid;
 
-    .dropdown-open & {
-      transform: rotate(0.5turn);
+    * {
+      grid-area: 1 / 1;
     }
+  }
+
+  &-chevron {
+    --chevron-scale: 0.8;
+    transition: transform var(--transition-time-medium);
+
+    &.up {
+      transform: scale(var(--chevron-scale)) translateY(calc(-1 * var(--chevron-translate)));
+    }
+
+    &.down {
+      transform: scale(var(--chevron-scale)) translateY(var(--chevron-translate));
+    }
+  }
+
+  &-open {
+    --chevron-translate: -37.5%;
   }
 
   // Hide everything except icon. EVERYTHING!

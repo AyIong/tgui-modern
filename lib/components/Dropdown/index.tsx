@@ -106,7 +106,10 @@ export function Dropdown(props: DropdownProps) {
         <ButtonContainer color={color} className="dropdown-handler" {...interactions}>
           {icon && <ButtonIcon className="dropdown-icon" {...icon} />}
           <ButtonContent className="dropdown-text">{displayedText}</ButtonContent>
-          <Icon className="dropdown-chevron" name="chevron-down" />
+          <div className="dropdown-chevrons">
+            <Icon className="dropdown-chevron up" name="chevron-up" />
+            <Icon className="dropdown-chevron down" name="chevron-down" />
+          </div>
         </ButtonContainer>
       </Floating>
       {buttons && (
