@@ -50,18 +50,19 @@
 
     &-content {
       --paddings: var(--space-m);
+      --border-width: var(--border-width-1);
 
       text-wrap: balance;
       margin: var(--space-s) 0;
       padding: var(--paddings);
       background-color: fn.oklch-from(background-color, $a: 0.85);
-      border: var(--border-width-1) solid var(--border-color);
+      border: var(--border-width) solid var(--border-color);
       border-radius: var(--border-radius-2);
       box-shadow: var(--shadow-medium) var(--shadow-color);
       backdrop-filter: var(--blur-medium);
 
       &.nested:not([data-placement="bottom-start"]) {
-        margin: calc(-1 * var(--paddings)) var(--paddings) 0;
+        margin: calc(-1 * var(--paddings) - var(--border-width)) var(--paddings) 0;
       }
     }
 
