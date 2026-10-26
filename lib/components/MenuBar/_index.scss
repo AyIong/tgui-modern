@@ -49,12 +49,12 @@
     }
 
     &-content {
-      --paddings: var(--space-m);
+      --padding: var(--space-m);
       --border-width: var(--border-width-1);
 
       text-wrap: balance;
       margin: var(--space-s) 0;
-      padding: var(--paddings);
+      padding: var(--padding);
       background-color: fn.oklch-from(background-color, $a: 0.85);
       border: var(--border-width) solid var(--border-color);
       border-radius: var(--border-radius-2);
@@ -62,7 +62,11 @@
       backdrop-filter: var(--blur-medium);
 
       &.nested:not([data-placement="bottom-start"]) {
-        margin: calc(-1 * var(--paddings) - var(--border-width)) var(--paddings) 0;
+        margin-top: calc(-1 * var(--padding) - var(--border-width));
+
+        &[data-placement="right-start"] {
+          margin-left: var(--padding);
+        }
       }
     }
 

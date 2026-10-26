@@ -31,6 +31,7 @@ export function MenuDropdown(props: MenuDropdownProps) {
   const [localOpen, setLocalOpen] = useState(false);
   const isOpen = isNested ? localOpen : menuBar.openId === dropdownId;
   const { refs, floatingStyles, context } = useFloating({
+    nodeId,
     placement: isNested ? 'right-start' : 'bottom-start',
     middleware: [flip({ padding: 6, fallbackAxisSideDirection: 'end' })],
     open: isOpen,
