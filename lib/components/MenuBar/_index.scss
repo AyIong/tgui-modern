@@ -1,0 +1,74 @@
+@use "@styles/functions" as fn;
+
+.menubar {
+  display: flex;
+  gap: var(--space-s);
+
+  &-item {
+    --indent-x: var(--space-m);
+
+    cursor: var(--cursor-pointer);
+    user-select: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--indent-x);
+    padding: var(--space-s) var(--indent-x);
+    color: var(--text-color-translucent-light);
+    border-radius: var(--border-radius-2);
+
+    &:hover,
+    &.selected {
+      background-color: var(--subtle-color);
+      color: var(--text-color);
+    }
+
+    &.disabled {
+      pointer-events: none;
+      cursor: var(--cursor-disabled);
+      opacity: var(--opacity-disabled);
+      color: var(--text-color-translucent);
+    }
+
+    &:not(.checked):not(.nested) > .icon {
+      color: transparent;
+    }
+  }
+
+  &-dropdown {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-m);
+
+    &:not(.nested) {
+      padding: var(--space-s) var(--space-m);
+    }
+
+    &-display {
+      flex: 1;
+    }
+
+    &-content {
+      --paddings: var(--space-m);
+
+      text-wrap: balance;
+      margin: var(--space-s) 0;
+      padding: var(--paddings);
+      background-color: fn.oklch-from(background-color, $a: 0.85);
+      border: var(--border-width-1) solid var(--border-color);
+      border-radius: var(--border-radius-2);
+      box-shadow: var(--shadow-medium) var(--shadow-color);
+      backdrop-filter: var(--blur-medium);
+
+      &.nested:not([data-placement="bottom-start"]) {
+        margin: calc(-1 * var(--paddings)) var(--paddings) 0;
+      }
+    }
+
+    &.nested {
+      cursor: var(--cursor-default);
+      display: flex;
+      padding-right: var(--space-m);
+    }
+  }
+}

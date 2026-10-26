@@ -25,6 +25,7 @@ export { Knob } from './Knob';
 export { LabeledControls, LabeledControlsItem } from './LabeledControls';
 export { LabeledList } from './LabeledList';
 export { Layout } from './Layout';
+export { MenuBar } from './MenuBar';
 export { Modal } from './Modal';
 export { NoticeBox } from './NoticeBox';
 export { NumberInput } from './NumberInput';

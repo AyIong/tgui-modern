@@ -44,6 +44,8 @@
   --surface-h: var(--background-h);
   --surface-color: oklch(var(--surface-l) calc(var(--surface-c) + 0.005) var(--surface-h));
 
+  --subtle-color: oklch(1 0 0 / 0.1);
+
   /* Text colors */
   --text-color: oklch(0.925 0.015 var(--primary-h));
   --text-color-translucent: oklch(from var(--text-color) l c h / 0.5);
