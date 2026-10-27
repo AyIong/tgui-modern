@@ -6,6 +6,10 @@ import type { BoxProps } from '../Box/types';
 import { Icon } from '../Icon';
 import type { IconProps } from '../Icon/types';
 import { Tooltip } from '../Tooltip';
+import { Checkbox } from './Checkbox';
+import { Confirm } from './Confirm';
+import { ButtonFile } from './File';
+import { ButtonInput } from './Input';
 import type { ButtonBaseProps, ButtonContentProps, ButtonIconProps, ButtonProps } from './types';
 
 /**
@@ -100,3 +104,8 @@ export function ButtonContent(props: ButtonContentProps) {
     </div>
   );
 }
+
+Button.Checkbox = Checkbox;
+Button.Confirm = Confirm;
+Button.Input = ButtonInput;
+Button.File = ButtonFile;

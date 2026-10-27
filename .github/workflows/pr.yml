@@ -43,4 +43,4 @@ jobs:
         run: bun test
 
       - name: Run build script
-        run: bun build-rslib
+        run: bun build:rslib

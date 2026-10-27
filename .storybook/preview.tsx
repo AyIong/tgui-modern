@@ -45,7 +45,13 @@ const preview: Preview = {
   parameters: {
     options: {
       storySort: {
-        order: ['Interfaces', 'Components', 'Hooks'],
+        includeNames: true,
+        order: [
+          'Interfaces',
+          'Components',
+          ['Button', ['Docs', 'Default', 'Colors', '*']],
+          'Hooks',
+        ],
       },
     },
     actions: { argTypesRegex: '^on[A-Z].*' },

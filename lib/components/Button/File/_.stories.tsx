@@ -1,17 +1,17 @@
 import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from 'storybook-react-rsbuild';
-import { ButtonFile } from '.';
+import { Button } from '..';
 
-type StoryProps = ComponentProps<typeof ButtonFile>;
+type StoryProps = ComponentProps<typeof Button.File>;
 
 export default {
-  component: ButtonFile,
-  title: 'Components/ButtonFile',
+  component: Button.File,
+  title: 'Components/Button',
 } satisfies Meta<StoryProps>;
 
 type Story = StoryObj<StoryProps>;
 
-export const Default: Story = {
+export const File: Story = {
   args: {
     accept: 'image/*',
     children: 'Upload file',

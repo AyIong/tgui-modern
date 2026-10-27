@@ -1,23 +1,23 @@
 import { type ComponentProps, useState } from 'react';
 import type { Meta, StoryObj } from 'storybook-react-rsbuild';
 import { Stack } from '../../Stack';
-import { ButtonInput } from '.';
+import { Button } from '..';
 
-type StoryProps = ComponentProps<typeof ButtonInput>;
+type StoryProps = ComponentProps<typeof Button.Input>;
 
 export default {
-  component: ButtonInput,
-  title: 'Components/ButtonInput',
+  component: Button.Input,
+  title: 'Components/Button',
 } satisfies Meta<StoryProps>;
 
 type Story = StoryObj<StoryProps>;
 
-export const Default: Story = {
+export const Input: Story = {
   render: () => {
     const [text, setText] = useState('Type something');
     return (
       <Stack>
-        <ButtonInput value={text} onCommit={(value) => setText(value)} />
+        <Button.Input value={text} onCommit={(value) => setText(value)} />
       </Stack>
     );
   },

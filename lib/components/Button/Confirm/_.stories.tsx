@@ -1,18 +1,18 @@
 import { type ComponentProps, useState } from 'react';
 import type { Meta, StoryObj } from 'storybook-react-rsbuild';
 import { Stack } from '../../Stack';
-import { Confirm } from '.';
+import { Button } from '..';
 
-type StoryProps = ComponentProps<typeof Confirm>;
+type StoryProps = ComponentProps<typeof Button.Confirm>;
 
 export default {
-  component: Confirm,
-  title: 'Components/Confirm',
+  component: Button.Confirm,
+  title: 'Components/Button',
 } satisfies Meta<StoryProps>;
 
 type Story = StoryObj<StoryProps>;
 
-export const Default: Story = {
+export const Confirm: Story = {
   args: {
     children: 'Hold me',
     fluid: false,
@@ -23,7 +23,7 @@ export const Default: Story = {
     return (
       <Stack>
         <Stack.Item grow>
-          <Confirm onClick={() => setConfirmed(!confirmed)} {...args} />
+          <Button.Confirm onClick={() => setConfirmed(!confirmed)} {...args} />
         </Stack.Item>
         <Stack.Item>{confirmed ? 'Confirmed' : 'Confirm'}</Stack.Item>
       </Stack>
