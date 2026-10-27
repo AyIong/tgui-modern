@@ -16,6 +16,7 @@ export function Confirm(props: ConfirmProps) {
   const {
     children,
     color,
+    disabled,
     startIcon,
     confirmDelay,
     confirmedContent,
@@ -28,8 +29,15 @@ export function Confirm(props: ConfirmProps) {
   const [holding, setHolding] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [canceled, setCanceled] = useState(false);
+
   const handlePress = useLongPress(
     (event) => {
+      // Return only here, appearance change will be
+      // blocked by CSS disabled class
+      if (disabled) {
+        return;
+      }
+
       setHolding(false);
       setConfirmed(true);
       onClick?.(event);
@@ -72,7 +80,7 @@ export function Confirm(props: ConfirmProps) {
 
   return (
     <ButtonContainer
-      className={classes('button-confirm', confirmed && 'confirmed')}
+      className={classes('button-confirm', confirmed && 'confirmed', disabled && 'disabled')}
       style={
         {
           '--confirm-delay': `${confirmDelay || defaultConfirmDelay}ms`,
