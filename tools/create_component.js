@@ -42,6 +42,6 @@ Object.entries(files).forEach(([filename, content]) => {
   fs.writeFileSync(path.join(baseDir, filename), content);
 });
 
-fs.appendFileSync(path.join('lib', 'components', 'main.scss'), `@forward "./${componentName}";\n`);
+fs.appendFileSync(path.join('lib', 'components', 'main.scss'), `@use "./${componentName}";\n`);
 
 console.log(`Done!`);

@@ -31,7 +31,7 @@ export type ButtonBaseProps = Partial<{
 }> &
   ButtonInteractionProps &
   ButtonContentProps &
-  BoxProps<HTMLButtonElement>;
+  BoxProps<HTMLDivElement>;
 
 export type ButtonContentProps = Partial<{
   className: string;

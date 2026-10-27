@@ -30,4 +30,5 @@
 @use "./ProgressBar";
 @use "./Button/Confirm";
 @use "./Toast";
-@forward "./MenuBar";
+@use "./MenuBar";
+@use "./Button/Input" as ButtonInput;

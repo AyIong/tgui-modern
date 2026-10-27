@@ -38,7 +38,7 @@ function toStoredValue<TInput>(raw: string, isNumeric?: boolean): TInput {
 }
 
 export function useInput<TElement extends WritableElement, TInput extends string | number>(
-  ref: RefObject<TElement>,
+  ref: RefObject<TElement | null>,
   props: UseInputProps<TElement, TInput>,
 ) {
   const {

@@ -1,0 +1,24 @@
+@use "@styles/functions" as fn;
+
+.button-input {
+  position: relative;
+
+  &.active {
+    pointer-events: none;
+    cursor: var(--cursor-text);
+  }
+
+  &-content {
+    z-index: 0;
+  }
+
+  &--input {
+    pointer-events: auto;
+    position: absolute;
+    inset: fn.rem(2px);
+    padding: 0 calc(var(--button-content-padding) + fn.rem(1px));
+    background-color: fn.oklch-from(bg-color, $l: -0.2, $c: -0.075);
+    border-radius: var(--border-radius-1);
+    z-index: 1;
+  }
+}

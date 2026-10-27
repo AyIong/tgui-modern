@@ -6,6 +6,7 @@ export type { BoxProps } from './Box/types';
 export { Button } from './Button';
 export { Checkbox } from './Button/Checkbox';
 export { Confirm } from './Button/Confirm';
+export { ButtonInput } from './Button/Input';
 export { ByondUi } from './ByondUi';
 export { Chart } from './Chart';
 export { Collapsible } from './Collapsible';
