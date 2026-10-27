@@ -30,6 +30,7 @@ export { NumberInput } from './NumberInput';
 export { ProgressBar } from './ProgressBar';
 export { RestrictedInput } from './RestrictedInput';
 export { RoundGauge } from './RoundGauge';
+export { Scroller } from './Scroller';
 export { Section } from './Section';
 export { Slider } from './Slider';
 export { Stack } from './Stack';

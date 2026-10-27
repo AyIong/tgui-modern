@@ -1,0 +1,101 @@
+@use "@styles/functions" as fn;
+
+@property --scroller-button-bg {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --mask-left {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0rem;
+}
+
+@property --mask-right {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0rem;
+}
+
+/**
+ * NOTE: the parent of Scroller must be relative
+ * Because buttons are absolute
+ */
+.scroller {
+  --mask-width: #{fn.rem(32px)};
+
+  overflow-x: scroll;
+  scrollbar-width: none;
+  display: flex;
+  mask-image: linear-gradient(
+    90deg,
+    transparent calc(var(--mask-left) * 0.5),
+    black calc(0% + var(--mask-left)),
+    black calc(100% - var(--mask-right)),
+    transparent calc(100% - calc(var(--mask-right) * 0.5))
+  );
+  transition-property: --mask-left, --mask-right;
+  transition-duration: var(--transition-time-medium);
+
+  &.scrollable-left {
+    --mask-left: var(--mask-width);
+  }
+
+  &.scrollable-right {
+    --mask-right: var(--mask-width);
+  }
+
+  &.scrollable-left.scrollable-right {
+    --mask-left: var(--mask-width);
+    --mask-right: var(--mask-width);
+  }
+
+  &-button {
+    --bg-direction: to right;
+    cursor: var(--cursor-pointer);
+    aspect-ratio: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+      var(--bg-direction),
+      var(--scroller-button-bg) 0%,
+      transparent 100%
+    );
+    color: var(--text-color-translucent);
+    transition-property: transform, opacity, color, --scroller-button-bg;
+    transition-duration: var(--transition-time-medium);
+    z-index: 1;
+
+    &:hover {
+      --scroller-button-bg: var(--subtle-color);
+      color: var(--text-color);
+    }
+
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &.left {
+      left: 0;
+
+      &.hidden {
+        transform: translateX(-100%);
+      }
+    }
+
+    &.right {
+      --bg-direction: to left;
+      right: 0;
+
+      &.hidden {
+        transform: translateX(100%);
+      }
+    }
+  }
+}
