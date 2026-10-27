@@ -16,6 +16,8 @@
 
   // MARK: Section
   --section-color: #{fn.oklch-from(background-color, $l: -0.05, $a: 0.5)};
+  --section-border-color: var(--border-color);
+  --section-shadow-color: var(--shadow-color);
   --section-border-radius: var(--border-radius-3);
 }
 

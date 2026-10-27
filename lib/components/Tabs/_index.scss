@@ -1,0 +1,146 @@
+@use "@styles/functions" as fn;
+@use "../Section" as section;
+
+//MARK: Tabs
+.tabs {
+  --indicator-size: var(--border-width-2);
+
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background-color: var(--section-color);
+  @include section.section-border();
+
+  &.vertical {
+    flex-direction: column;
+
+    &.fill {
+      height: 100%;
+    }
+  }
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  // Interoperability with sections
+  .section & {
+    background-color: transparent;
+    border: none;
+    border-radius: unset;
+    box-shadow: unset;
+  }
+}
+
+// MARK: Tab
+.tab {
+  user-select: none;
+  cursor: var(--cursor-pointer);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-height: 2em;
+  color: var(--text-color-translucent);
+  border-radius: var(--border-radius-2) var(--border-radius-2) 0 var(--border-radius-2);
+  transition-duration: var(--transition-time-medium);
+  transition-property: background-color, color;
+
+  &:hover {
+    background-color: fn.oklch-from(fg-color, $a: 0.075);
+    transition-duration: 0s;
+  }
+
+  &:active {
+    color: var(--text-color-translucent-light);
+    transition-duration: 0s;
+  }
+
+  &.selected {
+    pointer-events: none;
+    background-color: fn.oklch-from(bg-color, $a: 0.25);
+    color: var(--fg-color);
+  }
+
+  &-text {
+    flex-grow: 1;
+    white-space: nowrap;
+    min-width: 4ch;
+    margin: 0 var(--space-m);
+    text-align: center;
+    transform: translate(var(--text-translate, 0));
+    transition: transform var(--transition-time-medium);
+  }
+
+  &-slot {
+    &--left,
+    &--right {
+      min-width: 1.5em;
+      text-align: center;
+    }
+
+    &--left {
+      margin-left: var(--space-s);
+    }
+
+    &--right {
+      margin-right: var(--space-s);
+    }
+  }
+
+  &-indicator {
+    pointer-events: none;
+    position: absolute;
+    right: var(--indicator-right, auto);
+    bottom: var(--indicator-bottom, auto);
+    width: var(--indicator-width, calc(100% - var(--space-l)));
+    height: var(--indicator-height, var(--indicator-size));
+    background-color: var(--fg-color);
+    border-radius: inherit;
+    corner-shape: bevel;
+    transform: translate(var(--indicator-translate));
+    transition-property: transform;
+    transition-duration: var(--transition-time-medium);
+  }
+
+  .fluid & {
+    flex-grow: 1;
+  }
+}
+
+// MARK: Orientation
+.tabs:not(.vertical) {
+  --indicator-bottom: 0;
+  padding-bottom: 0;
+
+  .tab {
+    --indicator-translate: 0, 100%;
+    border-bottom-left-radius: 0;
+
+    &.selected {
+      --indicator-translate: 0, 0;
+      --text-translate: 0, calc(-0.5 * var(--indicator-size));
+    }
+  }
+}
+
+.tabs.vertical {
+  --indicator-right: 0;
+  --indicator-width: var(--indicator-size);
+  --indicator-height: calc(100% - var(--space-s));
+  padding-right: 0;
+
+  .tab {
+    --indicator-translate: 100%, 0;
+    border-top-right-radius: 0;
+
+    &.selected {
+      --indicator-translate: 0, 0;
+      --text-translate: calc(-0.5 * var(--indicator-size)), 0;
+    }
+  }
+}
