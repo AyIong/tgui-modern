@@ -27,7 +27,7 @@ export function ButtonInput(props: ButtonInputProps) {
   return (
     <ButtonContainer
       className={classes('button-input', disabled && 'disabled', isActive && 'active')}
-      onClick={() => setActive(true)}
+      onClick={() => !disabled && setActive(true)}
       {...rest}
     >
       {isActive && (
