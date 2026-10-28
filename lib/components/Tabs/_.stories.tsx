@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: <Who cares?> */
 import { type ComponentProps, useState } from 'react';
 import type { Meta, StoryObj } from 'storybook-react-rsbuild';
 import { CSS_COLORS } from 'tgui-modern/common/constants';
@@ -66,34 +67,24 @@ export const Categories: Story = {
     const [selectAll, setSelectAll] = useState(false);
     const [tab, setTab] = useState('');
 
-    function renderTab(id: string, label: string) {
-      return (
-        <Tabs.Tab key={id} selected={tab === id} onClick={() => setTab(id)}>
-          {label}
-        </Tabs.Tab>
-      );
-    }
+    const categories = Array.from({ length: 3 }, (_, categoryIndex) => (
+      <Tabs.Category name={`Category ${categoryIndex + 1}`} key={`category-${categoryIndex}`}>
+        {Array.from({ length: 3 }, (_, tabIndex) => {
+          const id = `Category: ${categoryIndex} -> Tab:${tabIndex}`;
+          return (
+            <Tabs.Tab key={id} selected={tab === id} onClick={() => setTab(id)}>
+              {`Tab ${categoryIndex * 3 + tabIndex + 1}`}
+            </Tabs.Tab>
+          );
+        })}
+      </Tabs.Category>
+    ));
 
     return (
       <Stack fill height={40} vertical={!vertical} wrap>
         <Stack.Item>
           <Tabs fill vertical={vertical}>
-            {renderTab('outer-1', 'Outer tab 1')}
-            {Array.from({ length: 3 }, (_, categoryIndex) => (
-              <Tabs.Category
-                name={`Category ${categoryIndex + 1}`}
-                key={`category-${categoryIndex}`}
-              >
-                {Array.from({ length: 3 }, (_, tabIndex) =>
-                  renderTab(
-                    `category-${categoryIndex}-tab-${tabIndex}`,
-                    `Tab ${categoryIndex * 3 + tabIndex + 1}`,
-                  ),
-                )}
-              </Tabs.Category>
-            ))}
-            {renderTab('outer-2', 'Outer tab 2')}
-            {renderTab('outer-3', 'Outer tab 3')}
+            {categories}
           </Tabs>
         </Stack.Item>
         <Stack.Item grow>
@@ -109,7 +100,7 @@ export const Categories: Story = {
                 </Button.Checkbox>
               </>
             }
-            title={`Vertical Tabs - Tab ${tab}`}
+            title={`Vertical Tabs - ${tab}`}
           >
             Selected tab: {tab}
           </Section>

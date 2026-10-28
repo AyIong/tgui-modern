@@ -19,7 +19,7 @@ export function useTabs() {
 export function Tabs(props: TabsProps) {
   const { className, vertical, fill, fluid, wrap, children, ...rest } = props;
   const selectedTab = useRef<HTMLDivElement | null>(null);
-
+  console.log('Tabs render');
   return (
     <TabsContext.Provider value={{ selectedTab }}>
       <div

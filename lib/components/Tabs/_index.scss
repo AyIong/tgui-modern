@@ -1,10 +1,7 @@
-@use "@styles/functions" as fn;
 @use "../Section" as section;
 
 .tabs {
   --tabs-gap: var(--space-sm);
-  --tabs-padding: var(--tabs-gap) var(--tabs-padding-right, var(--tabs-gap))
-    var(--tabs-padding-bottom, var(--tabs-gap)) var(--tabs-gap);
   --tab-padding: var(--space-m);
   --indicator-size: var(--border-width-2);
 
@@ -16,22 +13,17 @@
 
   &-content {
     display: flex;
+    flex-direction: var(--flex-direction);
     gap: var(--tabs-gap);
     padding: var(--tabs-padding);
   }
 
-  &.vertical {
-    &.fill {
-      height: 100%;
-    }
-
-    .tabs-content {
-      flex-direction: column;
-    }
+  &.wrap .tabs-content {
+    flex-wrap: wrap;
   }
 
-  &.wrap {
-    flex-wrap: wrap;
+  &.vertical.fill {
+    height: 100%;
   }
 
   // Interoperability with sections
@@ -41,38 +33,48 @@
     border-radius: unset;
     box-shadow: unset;
   }
-}
 
-// MARK: Orientation
-.tabs:not(.vertical) {
-  --indicator-bottom: 0;
-  --tabs-padding-bottom: 0;
-
-  .tab {
-    --indicator-translate: 0, 100%;
-
-    &.selected {
-      --indicator-translate: 0, 0;
-      --content-translate: 0, calc(-0.5 * var(--indicator-size));
-    }
+  /**
+   * MARK: Orientation
+   * Everything that differs between orientations is defined here.
+   */
+  &:not(.vertical) {
+    --flex-direction: row;
+    --tabs-padding: var(--tabs-gap) var(--tabs-gap) 0;
+    // Tab
+    --tab-border-radius-tr: var(--border-radius-2);
+    --tab-border-radius-bl: 0;
+    --tab-border-radius-br: 0;
+    --indicator-hidden: 0, 100%;
+    --indicator-right: auto;
+    --indicator-bottom: 0;
+    --indicator-width: calc(100% - var(--space-l));
+    --indicator-height: var(--indicator-size);
+    --content-shift: 0, calc(-0.5 * var(--indicator-size));
+    // Category
+    --category-border-right: var(--border-width-1);
+    --category-border-bottom: 0;
+    --divider-width: var(--border-width-2);
+    --divider-height: calc(100% - var(--tabs-gap) * 2);
   }
-}
 
-.tabs.vertical {
-  --indicator-right: 0;
-  --indicator-width: var(--indicator-size);
-  --indicator-height: calc(100% - var(--space-s));
-  --tab-border-radius-tr: 0;
-  --tab-border-radius-bl: 0;
-  --tab-border-radius-br: var(--border-radius-2);
-  --tabs-padding-right: 0;
-
-  .tab {
-    --indicator-translate: 100%, 0;
-
-    &.selected {
-      --indicator-translate: 0, 0;
-      --content-translate: calc(-0.5 * var(--indicator-size)), 0;
-    }
+  &.vertical {
+    --flex-direction: column;
+    --tabs-padding: var(--tabs-gap) 0 var(--tabs-gap) var(--tabs-gap);
+    // Tab
+    --tab-border-radius-tr: 0;
+    --tab-border-radius-bl: 0;
+    --tab-border-radius-br: var(--border-radius-2);
+    --indicator-hidden: 100%, 0;
+    --indicator-right: 0;
+    --indicator-bottom: auto;
+    --indicator-width: var(--indicator-size);
+    --indicator-height: calc(100% - var(--space-s));
+    --content-shift: calc(-0.5 * var(--indicator-size)), 0;
+    // Category
+    --category-border-right: 0;
+    --category-border-bottom: var(--border-width-1);
+    --divider-width: calc(100% - var(--tabs-gap) * 2);
+    --divider-height: var(--border-width-2);
   }
 }

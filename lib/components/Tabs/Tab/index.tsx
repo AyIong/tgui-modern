@@ -25,12 +25,12 @@ export function Tab(props: TabProps) {
   const interactions = useButton({
     disabled,
     onClick: (event) => {
-      console.log('Selected Tab');
       tabs.selectedTab.current = tabRef.current;
       onClick?.(event);
     },
   });
 
+  console.log('Tabs.Tab render');
   return (
     <div
       ref={tabRef}

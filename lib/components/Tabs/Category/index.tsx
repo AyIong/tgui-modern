@@ -22,6 +22,7 @@ export function TabsCategory(props: TabsCategoryProps) {
     }
   }
 
+  console.log('Tabs.Category render');
   return (
     <div className={classes('tabs-category', className, colorClassName(color))}>
       <div className="tabs-category-title" onClick={!hasAvailableTab && handleClick}>

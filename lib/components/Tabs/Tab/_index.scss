@@ -1,43 +1,34 @@
 @use "@styles/functions" as fn;
-
-@mixin border-radius() {
-  border-radius: var(--border-radius-2) var(--tab-border-radius-tr, var(--border-radius-2))
-    var(--tab-border-radius-bl, 0) var(--tab-border-radius-br, 0);
-}
-
-@mixin mouse-effects() {
-  cursor: var(--cursor-pointer);
-
-  &:hover {
-    background-color: fn.oklch-from(fg-color, $a: 0.075);
-    transition-duration: 0s;
-  }
-
-  &:active {
-    color: var(--text-color-translucent-light);
-    transition-duration: 0s;
-  }
-}
+@use "../mixins" as mixins;
 
 .tab {
-  user-select: none;
   overflow: hidden;
-  position: relative;
-  display: flex;
   flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  min-height: 2em;
   color: var(--text-color-translucent);
-  transition-duration: var(--transition-time-medium);
-  transition-property: background-color, color;
-  @include border-radius();
-  @include mouse-effects();
+  @include mixins.tab-base();
+  @include mixins.border-radius();
+  @include mixins.mouse-effects();
+
+  &.selected,
+  &.disabled {
+    pointer-events: none;
+  }
+
+  &.disabled {
+    opacity: var(--disabled-opacity);
+  }
 
   &.selected {
-    pointer-events: none;
     background-color: fn.oklch-from(bg-color, $a: 0.25);
     color: var(--fg-color);
+
+    .tab-indicator {
+      transform: translate(0, 0);
+    }
+
+    .tab-content {
+      transform: translate(var(--content-shift));
+    }
   }
 
   &-content {
@@ -45,7 +36,6 @@
     display: flex;
     gap: var(--tab-padding);
     margin: 0 var(--tab-padding);
-    transform: translate(var(--content-translate, 0));
     transition: transform var(--transition-time-medium);
 
     &--text {
@@ -67,19 +57,18 @@
   &-indicator {
     pointer-events: none;
     position: absolute;
-    right: var(--indicator-right, auto);
-    bottom: var(--indicator-bottom, auto);
-    width: var(--indicator-width, calc(100% - var(--space-l)));
-    height: var(--indicator-height, var(--indicator-size));
+    right: var(--indicator-right);
+    bottom: var(--indicator-bottom);
+    width: var(--indicator-width);
+    height: var(--indicator-height);
     background-color: var(--fg-color);
     border-radius: inherit;
     corner-shape: bevel;
-    transform: translate(var(--indicator-translate));
-    transition-property: transform;
-    transition-duration: var(--transition-time-medium);
+    transform: translate(var(--indicator-hidden));
+    transition: transform var(--transition-time-medium);
   }
 
-  .fluid & {
+  .tabs.fluid & {
     flex-grow: 1;
   }
 }
