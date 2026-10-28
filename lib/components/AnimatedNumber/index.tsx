@@ -93,5 +93,5 @@ export function AnimatedNumber(props: AnimatedNumberProps) {
     }
   }
 
-  return <span>{displayText}</span>;
+  return <span className="animated-number">{displayText}</span>;
 }

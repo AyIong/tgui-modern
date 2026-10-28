@@ -30,6 +30,7 @@
     align-items: center;
     gap: var(--space-m);
     padding: var(--space-m);
+    min-height: var(--base-height);
     border-bottom: var(--border-width-2) solid var(--section-title-border-color);
 
     > .left-side {
@@ -41,7 +42,6 @@
       align-content: center;
       font-weight: bold;
       font-size: fn.rem(16px);
-      min-height: var(--base-height);
       margin-left: var(--space-s);
       color: var(--section-title-color);
     }

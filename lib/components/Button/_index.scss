@@ -36,6 +36,7 @@
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: fn.em(14px);
     margin: 0 var(--button-content-padding);
     z-index: 1;
   }

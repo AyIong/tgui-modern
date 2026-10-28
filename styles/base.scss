@@ -15,10 +15,10 @@
   --font-size-unit: 12;
   --font-family: Inter, sans-serif;
   --font-family-mono: "JetBrains Mono", monospace;
-  --line-height: 16px;
+  --line-height: #{fn.em(16px)};
 
   // MARK: Border width
-  --border-width-unit: #{fn.rem(1px)};
+  --border-width-unit: #{fn.em(1px)};
   /* 1px */
   --border-width-1: var(--border-width-unit);
   /* 2px */
@@ -31,7 +31,7 @@
   --border-width-5: calc(var(--border-width-unit) * 6);
 
   // MARK: Border radius
-  --border-radius-unit: #{fn.rem(2px)};
+  --border-radius-unit: #{fn.em(2px)};
   /* 2px */
   --border-radius-1: var(--border-radius-unit);
   /* 4px */
@@ -46,7 +46,7 @@
   --border-radius-c: 99999px;
 
   // MARK: Spacing
-  --space-unit: #{fn.rem(1px)};
+  --space-unit: #{fn.em(1px)};
   /* 1px */
   --space-xxs: var(--space-unit);
   /* 2px */
@@ -67,7 +67,7 @@
   --space-xxl: calc(var(--space-unit) * 21);
 
   // MARK: Sizes
-  --base-height: #{fn.rem(20px)};
+  --base-height: #{fn.em(20px)};
   --base-input-width: #{fn.em(125px)};
 
   // MARK: Transition times
@@ -82,9 +82,9 @@
   --transition-time-slowest: var(--transition-time-unit);
 
   // MARK: Shadows
-  --shadow-small: 0 #{fn.rem(2px)} #{fn.rem(3px)} #{fn.rem(-1px)};
-  --shadow-medium: 0 #{fn.rem(3px)} #{fn.rem(4px)} #{fn.rem(-1px)};
-  --shadow-large: 0 #{fn.rem(4px)} #{fn.rem(5px)} 0;
+  --shadow-small: 0 #{fn.em(2px)} #{fn.em(3px)} #{fn.em(-1px)};
+  --shadow-medium: 0 #{fn.em(3px)} #{fn.em(4px)} #{fn.em(-1px)};
+  --shadow-large: 0 #{fn.em(4px)} #{fn.em(5px)} 0;
 
   // MARK: Blur
   --blur-small: blur(3px);
