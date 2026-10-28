@@ -20,7 +20,9 @@ export function Tabs(props: TabsProps) {
       ])}
       {...computeBoxProps(rest)}
     >
-      <Scroller disabled={vertical}>{children}</Scroller>
+      <Scroller className="tabs-content" disabled={vertical}>
+        {children}
+      </Scroller>
     </div>
   );
 }

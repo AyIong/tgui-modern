@@ -7,11 +7,14 @@
 
   overflow: hidden;
   position: relative;
-  display: flex;
-  gap: var(--space-sm);
-  padding: var(--space-sm);
+  display: grid;
   background-color: var(--section-color);
   @include section.section-border();
+
+  &-content {
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+  }
 
   &.vertical {
     flex-direction: column;
@@ -115,7 +118,10 @@
 // MARK: Orientation
 .tabs:not(.vertical) {
   --indicator-bottom: 0;
-  padding-bottom: 0;
+
+  .tabs-content {
+    padding-bottom: 0;
+  }
 
   .tab {
     --indicator-translate: 0, 100%;
@@ -132,7 +138,10 @@
   --indicator-right: 0;
   --indicator-width: var(--indicator-size);
   --indicator-height: calc(100% - var(--space-s));
-  padding-right: 0;
+
+  .tabs-content {
+    padding-right: 0;
+  }
 
   .tab {
     --indicator-translate: 100%, 0;
