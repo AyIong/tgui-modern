@@ -77,11 +77,11 @@ export function ButtonContainer(props: ButtonBaseProps) {
   );
 
   if (tooltip) {
-    finalButtonContainer = (
-      <Tooltip content={tooltip.content} position={tooltip.position}>
-        {finalButtonContainer}
-      </Tooltip>
-    );
+    if (typeof tooltip === 'string') {
+      finalButtonContainer = <Tooltip content={tooltip}>{finalButtonContainer}</Tooltip>;
+    } else {
+      finalButtonContainer = <Tooltip {...tooltip}>{finalButtonContainer}</Tooltip>;
+    }
   }
 
   return finalButtonContainer;

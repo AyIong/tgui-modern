@@ -56,7 +56,7 @@ export function NumberInput(props: NumberInputProps) {
         className={classes('numberinput', disabled && 'disabled', className, colorClassName(color))}
         {...computeBoxProps({
           style: {
-            '--width': width && `${width}ch`,
+            '--width': `${width}ch`,
             '--percentage': percentage.internal,
             ...style,
           },

@@ -27,7 +27,7 @@ export type ButtonBaseProps = Partial<{
   /** Changes button style */
   variant: 'filled' | 'transparent';
   /** A fancy, boxy tooltip, which appears when hovering over the button */
-  tooltip: TooltipContentProps;
+  tooltip: string | TooltipContentProps | false;
 }> &
   ButtonInteractionProps &
   ButtonContentProps &

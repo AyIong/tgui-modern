@@ -30,6 +30,7 @@
     align-items: center;
     gap: var(--space-m);
     padding: var(--space-m);
+    border-bottom: var(--border-width-2) solid var(--section-title-border-color);
 
     > .left-side {
       flex: 1;
@@ -62,7 +63,6 @@
 
       flex: 1;
       position: relative;
-      border-top: var(--border-width-2) solid var(--section-title-border-color);
     }
 
     &.fitted {
