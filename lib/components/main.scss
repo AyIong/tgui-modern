@@ -33,4 +33,6 @@
 @use "./MenuBar";
 @use "./Button/Input" as ButtonInput;
 @use "./Tabs";
+@use "./Tabs/Tab";
+@use "./Tabs/Category";
 @use "./Scroller";

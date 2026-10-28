@@ -1,0 +1,85 @@
+@use "@styles/functions" as fn;
+
+@mixin border-radius() {
+  border-radius: var(--border-radius-2) var(--tab-border-radius-tr, var(--border-radius-2))
+    var(--tab-border-radius-bl, 0) var(--tab-border-radius-br, 0);
+}
+
+@mixin mouse-effects() {
+  cursor: var(--cursor-pointer);
+
+  &:hover {
+    background-color: fn.oklch-from(fg-color, $a: 0.075);
+    transition-duration: 0s;
+  }
+
+  &:active {
+    color: var(--text-color-translucent-light);
+    transition-duration: 0s;
+  }
+}
+
+.tab {
+  user-select: none;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-height: 2em;
+  color: var(--text-color-translucent);
+  transition-duration: var(--transition-time-medium);
+  transition-property: background-color, color;
+  @include border-radius();
+  @include mouse-effects();
+
+  &.selected {
+    pointer-events: none;
+    background-color: fn.oklch-from(bg-color, $a: 0.25);
+    color: var(--fg-color);
+  }
+
+  &-content {
+    flex: 1;
+    display: flex;
+    gap: var(--tab-padding);
+    margin: 0 var(--tab-padding);
+    transform: translate(var(--content-translate, 0));
+    transition: transform var(--transition-time-medium);
+
+    &--text {
+      flex-grow: 1;
+      white-space: nowrap;
+      min-width: 4ch;
+      text-align: center;
+    }
+
+    &--slot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.5em;
+      text-align: center;
+    }
+  }
+
+  &-indicator {
+    pointer-events: none;
+    position: absolute;
+    right: var(--indicator-right, auto);
+    bottom: var(--indicator-bottom, auto);
+    width: var(--indicator-width, calc(100% - var(--space-l)));
+    height: var(--indicator-height, var(--indicator-size));
+    background-color: var(--fg-color);
+    border-radius: inherit;
+    corner-shape: bevel;
+    transform: translate(var(--indicator-translate));
+    transition-property: transform;
+    transition-duration: var(--transition-time-medium);
+  }
+
+  .fluid & {
+    flex-grow: 1;
+  }
+}

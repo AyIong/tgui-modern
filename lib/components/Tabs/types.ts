@@ -1,8 +1,8 @@
-import type { ReactNode, RefObject } from 'react';
+import type { RefObject } from 'react';
 import type { BoxProps } from '../Box/types';
-import type { IconProps } from '../Icon/types';
 
 export type TabContextProps = {
+  /** The currently selected <Tab> element, used by <Scroller> to scroll to it. */
   selectedTab: RefObject<HTMLDivElement | null>;
 };
 
@@ -20,21 +20,5 @@ export type TabsProps = Partial<{
   wrap: boolean;
   /** Use a vertical configuration, where tabs will be stacked vertically. */
   vertical: boolean;
-}> &
-  BoxProps;
-
-export type TabProps = Partial<{
-  /** Any FontAwesome icon */
-  icon: IconProps;
-  /** Left slot content */
-  leftSlot: ReactNode;
-  /** Right slot content */
-  rightSlot: ReactNode;
-  /** Whether the tab is selected */
-  selected: boolean;
-  /** Whether the tab is disabled */
-  disabled: boolean;
-  /** Called when element is clicked */
-  onClick: (event?) => void;
 }> &
   BoxProps;
