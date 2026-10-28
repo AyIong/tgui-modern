@@ -2,6 +2,7 @@ import { type ComponentProps, useState } from 'react';
 import type { Meta, StoryObj } from 'storybook-react-rsbuild';
 import { CSS_COLORS } from 'tgui-modern/common/constants';
 import { Button } from '../Button';
+import { Icon } from '../Icon';
 import { Section } from '../Section';
 import { Stack } from '../Stack';
 import { Tabs } from '.';
@@ -27,11 +28,10 @@ export const Default: Story = {
           <Tabs fill vertical={vertical}>
             {[...CSS_COLORS].map((color) => (
               <Tabs.Tab
-                color={color}
                 key={color}
-                onClick={() => setTab(color)}
+                color={color}
                 selected={selectAll || tab === color}
-                textAlign="center"
+                onClick={() => setTab(color)}
               >
                 {color || 'Default'}
               </Tabs.Tab>
@@ -54,35 +54,6 @@ export const Default: Story = {
             title={`Vertical Tabs - Tab ${tab}`}
           >
             Selected tab: {tab}
-          </Section>
-        </Stack.Item>
-      </Stack>
-    );
-  },
-};
-
-export const Scrollable: Story = {
-  render: () => {
-    const [selectedTab, setSelectedTab] = useState(14);
-
-    return (
-      <Stack vertical width={50} height={20}>
-        <Stack.Item>
-          <Tabs fluid>
-            {Array.from({ length: 25 }, (_, i) => (
-              <Tabs.Tab
-                key={`tab-${i}`}
-                selected={selectedTab === i}
-                onClick={() => setSelectedTab(i)}
-              >
-                Tab {i + 1}
-              </Tabs.Tab>
-            ))}
-          </Tabs>
-        </Stack.Item>
-        <Stack.Item grow>
-          <Section fill title="Scrollable Tabs">
-            Selected tab: {selectedTab + 1}
           </Section>
         </Stack.Item>
       </Stack>

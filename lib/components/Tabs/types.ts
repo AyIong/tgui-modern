@@ -32,7 +32,9 @@ export type TabProps = Partial<{
   rightSlot: ReactNode;
   /** Whether the tab is selected */
   selected: boolean;
+  /** Whether the tab is disabled */
+  disabled: boolean;
   /** Called when element is clicked */
-  onClick: (e?) => void;
+  onClick: (event?) => void;
 }> &
   BoxProps;
