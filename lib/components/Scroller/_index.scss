@@ -23,7 +23,7 @@
  * Because buttons are absolute
  */
 .scroller {
-  --mask-width: #{fn.rem(32px)};
+  --mask-width: #{fn.rem(48px)};
 
   overflow-x: scroll;
   scrollbar-width: none;
@@ -53,6 +53,7 @@
 
   &-button {
     --bg-direction: to right;
+
     cursor: var(--cursor-pointer);
     aspect-ratio: 1;
     position: absolute;

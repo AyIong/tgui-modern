@@ -65,9 +65,11 @@ export const Categories: Story = {
   render: () => {
     const [vertical, setVertical] = useState(true);
     const [selectAll, setSelectAll] = useState(false);
-    const [tab, setTab] = useState('');
 
-    const categories = Array.from({ length: 3 }, (_, categoryIndex) => (
+    const justATab = 'Just a tab';
+    const [tab, setTab] = useState(justATab);
+
+    const categories = Array.from({ length: 5 }, (_, categoryIndex) => (
       <Tabs.Category name={`Category ${categoryIndex + 1}`} key={`category-${categoryIndex}`}>
         {Array.from({ length: 3 }, (_, tabIndex) => {
           const id = `Category: ${categoryIndex} -> Tab:${tabIndex}`;
@@ -84,6 +86,9 @@ export const Categories: Story = {
       <Stack fill height={40} vertical={!vertical} wrap>
         <Stack.Item>
           <Tabs fill vertical={vertical}>
+            <Tabs.Tab key={justATab} selected={tab === justATab} onClick={() => setTab(justATab)}>
+              Lonely tab
+            </Tabs.Tab>
             {categories}
           </Tabs>
         </Stack.Item>
