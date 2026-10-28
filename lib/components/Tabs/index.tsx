@@ -2,7 +2,7 @@ import { createContext, useContext, useRef } from 'react';
 import { classes } from 'tgui-modern/common/react';
 import { computeBoxClassName, computeBoxProps } from 'tgui-modern/common/ui';
 import { Scroller } from '../Scroller';
-import { TabsCategory } from './Category';
+import { Category } from './Category';
 import { Tab } from './Tab';
 import type { TabContextProps, TabsProps } from './types';
 
@@ -19,7 +19,6 @@ export function useTabs() {
 export function Tabs(props: TabsProps) {
   const { className, vertical, fill, fluid, wrap, children, ...rest } = props;
   const selectedTab = useRef<HTMLDivElement | null>(null);
-  console.log('Tabs render');
   return (
     <TabsContext.Provider value={{ selectedTab }}>
       <div
@@ -43,4 +42,4 @@ export function Tabs(props: TabsProps) {
 }
 
 Tabs.Tab = Tab;
-Tabs.Category = TabsCategory;
+Tabs.Category = Category;

@@ -30,7 +30,7 @@ export function Tab(props: TabProps) {
     },
   });
 
-  console.log('Tabs.Tab render');
+  const leadingContent = canRender(leftSlot) ? leftSlot : icon ? <Icon {...icon} /> : null;
   return (
     <div
       ref={tabRef}
@@ -47,15 +47,7 @@ export function Tab(props: TabProps) {
     >
       <div className="tab-indicator" />
       <div className="tab-content">
-        {canRender(leftSlot) ? (
-          <div className="tab-content--slot">{leftSlot}</div>
-        ) : (
-          icon && (
-            <div className="tab-content--slot">
-              <Icon {...icon} />
-            </div>
-          )
-        )}
+        {canRender(leadingContent) && <div className="tab-content--slot">{leadingContent}</div>}
         <div className="tab-content--text">{children}</div>
         {canRender(rightSlot) && <div className="tab-content--slot">{rightSlot}</div>}
       </div>

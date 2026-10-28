@@ -1,31 +1,24 @@
 import { useRef } from 'react';
 import { colorClassName } from 'tgui-modern/common/color';
 import { classes } from 'tgui-modern/common/react';
-import type { TabsCategoryProps } from './types';
+import type { CategoryProps } from './types';
 
-export function TabsCategory(props: TabsCategoryProps) {
+export function Category(props: CategoryProps) {
   const { children, name, className, color } = props;
 
-  let hasAvailableTab: boolean = false;
   const contentRef = useRef<HTMLDivElement>(null);
-
   function handleClick() {
     const content = contentRef.current;
     if (!content || content.querySelector('.tab.selected')) {
       return;
     }
 
-    const availableTab = content.querySelector<HTMLDivElement>('.tab:not(.disabled)');
-    if (availableTab) {
-      hasAvailableTab = true;
-      availableTab?.click();
-    }
+    content.querySelector<HTMLDivElement>('.tab:not(.disabled)')?.click();
   }
 
-  console.log('Tabs.Category render');
   return (
     <div className={classes('tabs-category', className, colorClassName(color))}>
-      <div className="tabs-category-title" onClick={!hasAvailableTab && handleClick}>
+      <div className="tabs-category-title" onClick={handleClick}>
         <div className="tabs-category-title--text">{name}</div>
       </div>
       <div className="tabs-category-divider" />

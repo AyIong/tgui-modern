@@ -2,6 +2,7 @@
 import { type ComponentProps, useState } from 'react';
 import type { Meta, StoryObj } from 'storybook-react-rsbuild';
 import { CSS_COLORS } from 'tgui-modern/common/constants';
+import { randomNumber } from 'tgui-modern/common/random';
 import { Button } from '../Button';
 import { Section } from '../Section';
 import { Stack } from '../Stack';
@@ -63,15 +64,13 @@ export const Default: Story = {
 
 export const Categories: Story = {
   render: () => {
-    const [vertical, setVertical] = useState(true);
-    const [selectAll, setSelectAll] = useState(false);
-
     const justATab = 'Just a tab';
     const [tab, setTab] = useState(justATab);
+    const [vertical, setVertical] = useState(true);
 
-    const categories = Array.from({ length: 5 }, (_, categoryIndex) => (
+    const categories = Array.from({ length: 10 }, (_, categoryIndex) => (
       <Tabs.Category name={`Category ${categoryIndex + 1}`} key={`category-${categoryIndex}`}>
-        {Array.from({ length: 3 }, (_, tabIndex) => {
+        {Array.from({ length: randomNumber(2, 10) }, (_, tabIndex) => {
           const id = `Category: ${categoryIndex} -> Tab:${tabIndex}`;
           return (
             <Tabs.Tab key={id} selected={tab === id} onClick={() => setTab(id)}>
@@ -96,16 +95,11 @@ export const Categories: Story = {
           <Section
             fill
             buttons={
-              <>
-                <Button.Checkbox checked={selectAll} onClick={() => setSelectAll(!selectAll)}>
-                  Select all
-                </Button.Checkbox>
-                <Button.Checkbox checked={vertical} onClick={() => setVertical(!vertical)}>
-                  Vertical
-                </Button.Checkbox>
-              </>
+              <Button.Checkbox checked={vertical} onClick={() => setVertical(!vertical)}>
+                Vertical
+              </Button.Checkbox>
             }
-            title={`Vertical Tabs - ${tab}`}
+            title={`${vertical ? 'Vertical' : 'Default'}  Tabs - ${tab}`}
           >
             Selected tab: {tab}
           </Section>

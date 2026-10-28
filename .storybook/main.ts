@@ -24,7 +24,7 @@ const config: StorybookConfig = {
   features: { backgrounds: false, interactions: false },
   framework: {
     name: 'storybook-react-rsbuild',
-    options: {},
+    options: { strictMode: false },
   },
   stories: ['../lib/components/**/*.stories.tsx', '../stories/**/*.stories.tsx'],
   typescript: {

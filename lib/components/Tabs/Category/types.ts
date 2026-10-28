@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type { CssColors } from 'tgui-modern/common/constants';
 
-export type TabsCategoryProps = {
+export type CategoryProps = {
   /** Category title. */
   name: string;
   /** Tabs.Tab elements. */
