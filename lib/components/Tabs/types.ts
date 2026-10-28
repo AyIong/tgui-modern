@@ -1,6 +1,10 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, RefObject } from 'react';
 import type { BoxProps } from '../Box/types';
 import type { IconProps } from '../Icon/types';
+
+export type TabContextProps = {
+  selectedTab: RefObject<HTMLDivElement | null>;
+};
 
 export type TabsProps = Partial<{
   /**

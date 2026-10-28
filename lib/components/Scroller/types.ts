@@ -9,7 +9,7 @@ export type ScrollerProps = {
   /** If true, will do nothing */
   disabled: boolean;
   /** Element ref to which scrolling will be performed.  */
-  scrollTo: RefObject<HTMLDivElement>;
+  scrollTo: RefObject<HTMLDivElement | null>;
 }>;
 
 export type ScrollerButtonProps = {

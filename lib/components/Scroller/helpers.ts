@@ -4,6 +4,8 @@ export const EDGE_TOLERANCE_PX = 3;
 export const SMOOTHING_FACTOR = 0.2;
 /** Share of the visible width scrolled by one click on an arrow button. */
 export const PAGE_SCROLL_RATIO = 0.5;
+/** Pause in ms between wheel events, after which a new one starts and may scroll the page. */
+export const SCROLL_SWITCH_COOLDOWN = 400;
 
 export function getMaxScrollLeft(scrollable: HTMLElement) {
   return scrollable.scrollWidth - scrollable.clientWidth;

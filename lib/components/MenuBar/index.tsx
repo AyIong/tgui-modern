@@ -9,7 +9,7 @@ const MenuBarContext = createContext<MenuBarContextProps | null>(null);
 export function useMenuBar() {
   const context = useContext(MenuBarContext);
   if (!context) {
-    throw new Error('Subcomponent must be used inside <MenuBar>');
+    throw new Error('Must be used inside <MenuBar>');
   }
   return context;
 }

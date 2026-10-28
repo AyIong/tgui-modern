@@ -67,7 +67,7 @@
       transparent 100%
     );
     color: var(--text-color-translucent);
-    transition-property: transform, opacity, color, --scroller-button-bg;
+    transition-property: opacity, visibility, transform, color, --scroller-button-bg;
     transition-duration: var(--transition-time-medium);
     z-index: 1;
 
@@ -78,24 +78,20 @@
 
     &.hidden {
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
+      transform: scale(0.33);
     }
 
     &.left {
       left: 0;
-
-      &.hidden {
-        transform: translateX(-100%);
-      }
+      transform-origin: left;
     }
 
     &.right {
       --bg-direction: to left;
       right: 0;
-
-      &.hidden {
-        transform: translateX(100%);
-      }
+      transform-origin: right;
     }
   }
 }

@@ -1,6 +1,11 @@
 import { type RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { clamp } from 'tgui-modern/common/math';
-import { EDGE_TOLERANCE_PX, getMaxScrollLeft, SMOOTHING_FACTOR } from './helpers';
+import {
+  EDGE_TOLERANCE_PX,
+  getMaxScrollLeft,
+  SCROLL_SWITCH_COOLDOWN,
+  SMOOTHING_FACTOR,
+} from './helpers';
 
 /**
  * Tracks whether there is hidden content on the left / right of the scrollable.
@@ -19,10 +24,14 @@ export function useScrollEdges(
       return;
     }
 
-    const updateEdges = () => {
+    function updateEdges() {
+      if (!scrollable) {
+        return;
+      }
+
       setCanScrollLeft(scrollable.scrollLeft > EDGE_TOLERANCE_PX);
       setCanScrollRight(scrollable.scrollLeft < getMaxScrollLeft(scrollable) - EDGE_TOLERANCE_PX);
-    };
+    }
 
     /**
      * Watch the container and every direct child.
@@ -30,13 +39,17 @@ export function useScrollEdges(
      * For example, when user adds new tab in chat.
      */
     const resizeObserver = new ResizeObserver(updateEdges);
-    const observeSizes = () => {
+    function observeSizes() {
+      if (!scrollable) {
+        return;
+      }
+
       resizeObserver.disconnect();
       resizeObserver.observe(scrollable);
       Array.from(scrollable.children).forEach((child) => {
         resizeObserver.observe(child);
       });
-    };
+    }
 
     const mutationObserver = new MutationObserver(observeSizes);
     mutationObserver.observe(scrollable, { childList: true });
@@ -63,6 +76,7 @@ export function useSmoothScroll(
 ) {
   const targetScrollLeft = useRef(0);
   const animationFrameId = useRef<number | null>(null);
+  const lastWheelEvent = useRef(Number.NEGATIVE_INFINITY);
 
   const scrollBy = useCallback(
     (delta: number) => {
@@ -108,15 +122,23 @@ export function useSmoothScroll(
       return;
     }
 
-    const handleWheel = (event: WheelEvent) => {
+    function handleWheel(event: WheelEvent) {
       if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
         return;
       }
 
-      if (scrollBy(event.deltaY)) {
+      /**
+       * Once  scroller used, keep holding wheel events until small pause,
+       * so fast scrolling will not switch to the page scroll,
+       * until user make pause to see Scroller end content.
+       */
+      const didScroll = scrollBy(event.deltaY);
+      const isGestureContinuing = event.timeStamp - lastWheelEvent.current < SCROLL_SWITCH_COOLDOWN;
+      if (didScroll || isGestureContinuing) {
         event.preventDefault();
+        lastWheelEvent.current = event.timeStamp;
       }
-    };
+    }
 
     scrollable.addEventListener('wheel', handleWheel, { passive: false });
     return () => {
@@ -136,7 +158,7 @@ export function useSmoothScroll(
  * whenever element changes (instantly first time).
  */
 export function useScrollIntoView(target?: RefObject<HTMLDivElement | null>, disabled?: boolean) {
-  const previousElement = useRef<HTMLElement | null>(null);
+  const previousElement = useRef<HTMLDivElement | null>(null);
   const hasScrolled = useRef(false);
 
   useEffect(() => {
@@ -152,5 +174,5 @@ export function useScrollIntoView(target?: RefObject<HTMLDivElement | null>, dis
       block: 'nearest', // do not scroll page vertically
     });
     hasScrolled.current = true;
-  });
+  }, [target?.current]);
 }
