@@ -55,12 +55,8 @@ export function ImageButton(props: ImageButtonProps) {
     if (fluid) {
       return (
         <>
-          <span
-            className={classes(['imagebutton-content--title', description && 'has-description'])}
-          >
-            {children}
-          </span>
-          {description && <span className="imagebutton-content--description">{description}</span>}
+          <span className={classes(['title', description && 'has-description'])}>{children}</span>
+          {description && <span className="description">{description}</span>}
         </>
       );
     }

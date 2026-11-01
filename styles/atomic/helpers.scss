@@ -27,3 +27,8 @@
 .monospace {
   font-family: var(--font-family-mono);
 }
+
+.disabled {
+  pointer-events: none;
+  cursor: var(--cursor-disabled);
+}

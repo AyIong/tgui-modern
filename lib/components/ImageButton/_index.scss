@@ -1,8 +1,11 @@
 @use "@styles/functions" as fn;
 
+// MARK: Common styles
 .imagebutton {
-  --imagebutton-border-radius: var(--border-radius-2);
   --imagebutton-bg-color: #{fn.oklch-from(bg-color, $a: 0.2)};
+  --imagebutton-border-color: #{fn.oklch-from(bg-color, $a: 0.33)};
+  --imagebutton-border: var(--border-width-1) solid var(--imagebutton-border-color);
+  --imagebutton-border-radius: var(--border-radius-2);
   // Image
   --image-margin: var(--space-s);
   --image-border-width: var(--border-width-1);
@@ -15,9 +18,7 @@
   cursor: var(--cursor-pointer);
   overflow: hidden;
   position: relative;
-  display: inline-grid;
   text-align: center;
-  width: calc(var(--image-size) + (var(--image-margin) * 2) + (var(--image-border-width) * 2));
   background-color: var(--imagebutton-bg-color);
   border-radius: var(--imagebutton-border-radius);
   transition: background-color var(--transition-time-medium);
@@ -37,48 +38,30 @@
 
   &.disabled {
     --opacity: var(--opacity-disabled);
-    pointer-events: none;
   }
 
   &-inner {
-    display: grid;
     opacity: var(--opacity, 1);
     transition: opacity var(--transition-time-medium);
 
     &--image {
       display: grid;
-      border: var(--border-width-1) solid var(--imagebutton-bg-color);
-      border-bottom: 0;
+      align-items: center;
       border-radius: var(--imagebutton-border-radius) var(--imagebutton-border-radius) 0 0;
 
       img {
         aspect-ratio: 1;
         width: var(--image-size);
-        margin: var(--image-margin);
         // Used pixels cause image sizes in px
         filter: drop-shadow(0 3px 0 oklch(0 0 0 / 0.5));
         transform: translateY(var(--image-translate));
         transition: transform var(--image-transition-duration);
       }
     }
-
-    &--content {
-      anchor-name: --imagebutton-content;
-      padding: var(--content-padding-vertical) var(--space-s);
-      background-color: var(--bg-color);
-      color: fn.color-contrast();
-      border-top: var(--content-border-width) solid fn.fg(var(--bg-color));
-      border-bottom: var(--content-border-width) solid transparent;
-      transition: background-color var(--transition-time-medium);
-    }
   }
 
   &-buttons {
     pointer-events: all;
-    position: absolute;
-    position-anchor: --imagebutton-content;
-    bottom: anchor(top);
-    left: var(--image-border-width);
     display: flex;
 
     > * {
@@ -86,19 +69,121 @@
     }
 
     &.alternative {
+      flex-direction: column;
+    }
+  }
+}
+
+// MARK: Card
+.imagebutton:not(.fluid) {
+  display: inline-grid;
+  width: calc(var(--image-size) + (var(--image-margin) * 2) + (var(--image-border-width) * 2));
+
+  .imagebutton {
+    &-inner {
+      display: grid;
+
+      &--image {
+        border: var(--imagebutton-border);
+        border-bottom: 0;
+
+        img {
+          margin: var(--image-margin);
+        }
+      }
+
+      &--content {
+        anchor-name: --imagebutton-content;
+        padding: var(--content-padding-vertical) var(--space-s);
+        background-color: var(--bg-color);
+        color: fn.color-contrast();
+        border-top: var(--content-border-width) solid fn.fg(var(--bg-color));
+        border-bottom: var(--content-border-width) solid transparent;
+      }
+    }
+
+    &-buttons {
       --text-shadow-blur: #{fn.rem(1px)};
       --text-shadow-thickness: #{fn.rem(0.666px)};
       --text-shadow-color: var(--background-color);
 
-      pointer-events: none;
-      inset: 0 0 auto 0;
-      flex-direction: column;
-      /** Text outline. Sort of. What a mess... */
-      text-shadow:
-        0px var(--text-shadow-thickness) var(--text-shadow-blur) var(--text-shadow-color),
-        calc(-1 * var(--text-shadow-thickness)) 0px var(--text-shadow-blur) var(--text-shadow-color),
-        var(--text-shadow-thickness) 0px var(--text-shadow-blur) var(--text-shadow-color),
-        0px calc(-1 * var(--text-shadow-thickness)) var(--text-shadow-blur) var(--text-shadow-color);
+      position-anchor: --imagebutton-content;
+      position: absolute;
+      bottom: anchor(top);
+      left: var(--image-border-width);
+
+      &.alternative {
+        pointer-events: none;
+        inset: 0 0 auto 0;
+        /** Text outline. Sort of. What a mess... */
+        text-shadow:
+          0px var(--text-shadow-thickness) var(--text-shadow-blur) var(--text-shadow-color),
+          calc(-1 * var(--text-shadow-thickness)) 0px var(--text-shadow-blur)
+            var(--text-shadow-color),
+          var(--text-shadow-thickness) 0px var(--text-shadow-blur) var(--text-shadow-color),
+          0px calc(-1 * var(--text-shadow-thickness)) var(--text-shadow-blur)
+            var(--text-shadow-color);
+      }
+    }
+  }
+}
+
+// MARK: Fluid
+.imagebutton.fluid {
+  display: flex;
+  border: var(--imagebutton-border);
+
+  .imagebutton {
+    &-inner {
+      flex: 1;
+      display: flex;
+      line-height: fn.em(14px);
+
+      &--content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        margin: 0 var(--space-m);
+        text-wrap: pretty;
+
+        > .title.has-description {
+          font-weight: bold;
+          border-bottom: var(--border-width-2) solid var(--bg-color);
+        }
+
+        > * {
+          padding: var(--space-m);
+        }
+      }
+    }
+
+    &-buttons {
+      --divider-border: var(--border-width-1) solid var(--imagebutton-border-color);
+
+      background-color: inherit;
+      border-left: var(--divider-border);
+
+      &:not(.alternative) > * {
+        border-left: var(--divider-border);
+
+        &:first-child {
+          border-left: 0;
+        }
+      }
+
+      &.alternative {
+        width: var(--image-size);
+
+        > * {
+          flex: 1;
+          justify-content: center;
+          border-top: var(--divider-border);
+
+          &:first-child {
+            border-top: 0;
+          }
+        }
+      }
     }
   }
 }

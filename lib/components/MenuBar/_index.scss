@@ -24,8 +24,6 @@
     }
 
     &.disabled {
-      pointer-events: none;
-      cursor: var(--cursor-disabled);
       opacity: var(--opacity-disabled);
       color: var(--text-color-translucent);
     }

@@ -73,7 +73,11 @@ export const FilledFluid: Story = {
     const [disabled, setDisabled] = useState(false);
     const [selected, setSelected] = useState(false);
     const buttons = (
-      <Button color={disabled && 'bad'} onClick={() => setDisabled(!disabled)}>
+      <Button
+        color={disabled && 'bad'}
+        variant="transparent"
+        onClick={() => setDisabled(!disabled)}
+      >
         <Icon mb={1} name={'power-off'} size={1.66} />
         <br />
         {disabled ? 'Enable' : 'Disable'}
@@ -84,25 +88,23 @@ export const FilledFluid: Story = {
       <>
         <ImageButton
           {...args}
+          mb={0.5}
           buttonsAlt={buttons}
           disabled={disabled}
+          description="Fluid with buttonsAlt prop. buttonsAlt container has a fixed width that depends on the size of the image"
           onClick={() => setSelected(!selected)}
           onRightClick={() => setDisabled(!disabled)}
           selected={selected}
-        >
-          Fluid with buttonsAlt prop. buttonsAlt container has a fixed width that depends on the
-          size of the image
-        </ImageButton>
+        />
         <ImageButton
           {...args}
           buttons={buttons}
           disabled={disabled}
+          description="Fluid with buttons prop. buttons container can have custom width. Here is auto width"
           onClick={() => setSelected(!selected)}
           onRightClick={() => setDisabled(!disabled)}
           selected={selected}
-        >
-          Fluid with buttons prop. buttons container can have custom width. Here is auto width
-        </ImageButton>
+        />
       </>
     );
   },
@@ -125,6 +127,7 @@ export const Mixed: Story = {
     const controls = (
       <>
         <Button
+          variant="transparent"
           color={disabled && 'bad'}
           startIcon={'power-off'}
           onClick={() => setDisabled(!disabled)}
