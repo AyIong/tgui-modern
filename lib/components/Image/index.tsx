@@ -52,5 +52,5 @@ export function Image(props: ImageProps) {
     return () => clearTimer();
   }, []);
 
-  return <img alt="dm icon" src={src || transparentImg} onError={handleError} {...computedProps} />;
+  return <img alt="dm icon" draggable="false" src={src || transparentImg} onError={handleError} {...computedProps} />;
 }

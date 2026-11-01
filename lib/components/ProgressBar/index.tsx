@@ -1,7 +1,6 @@
 import { CSS_COLORS } from '@common/constants';
 import { clamp01, keyOfMatchingRange, scale } from '@common/math';
 import { computeBoxClassName, computeBoxProps } from '@common/ui';
-import type { CSSProperties } from 'react';
 import { colorClassName } from 'tgui-modern/common/color';
 import { classes } from 'tgui-modern/common/react';
 import { AnimatedNumber } from '../AnimatedNumber';
@@ -45,7 +44,7 @@ export function ProgressBar(props: ProgressBarProps) {
   ];
   const fillStyles = {
     '--percentage': `${clamp01(scaledValue) * 100}%`,
-  } as CSSProperties;
+  };
 
   if (CSS_COLORS.includes(effectiveColor as any) || effectiveColor === 'primary') {
     // If the color is a color-<name> class, just use that.

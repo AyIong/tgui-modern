@@ -1,6 +1,5 @@
 import { clamp01, keyOfMatchingRange, scale } from '@common/math';
 import { computeBoxClassName, computeBoxProps } from '@common/ui';
-import type { CSSProperties } from 'react';
 import { colorClassName } from 'tgui-modern/common/color';
 import { classes } from 'tgui-modern/common/react';
 import { AnimatedNumber } from '../AnimatedNumber';
@@ -89,12 +88,10 @@ export function RoundGauge(props: RoundGaugeProps) {
       <circle
         key={color}
         className={colorClassName(color)}
-        style={
-          {
-            '--range': col_ranges[1] - col_ranges[0],
-            '--rotation': `${180 + 180 * col_ranges[0]}deg`,
-          } as CSSProperties
-        }
+        style={{
+          '--range': col_ranges[1] - col_ranges[0],
+          '--rotation': `${180 + 180 * col_ranges[0]}deg`,
+        }}
       />
     );
   });

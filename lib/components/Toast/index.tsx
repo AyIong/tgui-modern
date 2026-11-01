@@ -1,4 +1,4 @@
-import { type CSSProperties, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast as hotToast, resolveValue, type Toast, useToaster } from 'react-hot-toast/headless';
 import { colorClassName } from 'tgui-modern/common/color';
 import { classes } from 'tgui-modern/common/react';
@@ -69,12 +69,10 @@ export function Toaster() {
               !toastElement.visible && 'hidden',
               isOffLimit && 'off-limit',
             )}
-            style={
-              {
-                '--index': toastIndex,
-                '--duration': `${toastElement.duration || defaultDuration}ms`,
-              } as CSSProperties
-            }
+            style={{
+              '--index': toastIndex,
+              '--duration': `${toastElement.duration || defaultDuration}ms`,
+            }}
           >
             {resolveValue(toastElement.message, toastElement)}
           </div>

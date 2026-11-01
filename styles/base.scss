@@ -76,8 +76,8 @@
   --transition-time-fast: calc(var(--transition-time-unit) * 0.1);
   /* 0.2s | 200ms */
   --transition-time-medium: calc(var(--transition-time-unit) * 0.2);
-  /* 0.5s | 500ms */
-  --transition-time-slow: calc(var(--transition-time-unit) * 0.5);
+  /* 0.4s | 400ms */
+  --transition-time-slow: calc(var(--transition-time-unit) * 0.4);
   /* 1s | 1000ms */
   --transition-time-slowest: var(--transition-time-unit);
 

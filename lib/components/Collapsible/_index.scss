@@ -1,7 +1,6 @@
 @use "@styles/functions" as fn;
 
 .collapsible {
-  --color: contrast-color(#{fn.oklch-from(bg-color, $l: -0.1)});
   --border-radius: var(--border-radius-2);
   --gap: var(--space-m);
 
@@ -24,7 +23,7 @@
     padding: 0 var(--space-m);
     min-height: var(--base-height);
     background-color: var(--bg-color);
-    color: var(--color);
+    color: fn.color-contrast();
   }
 
   &-title {
@@ -96,7 +95,7 @@
     &-2,
     &-3 {
       position: absolute;
-      background-color: var(--color);
+      background-color: fn.color-contrast();
     }
 
     .is-open & {

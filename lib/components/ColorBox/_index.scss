@@ -9,5 +9,5 @@
   font-weight: bold;
   font-family: var(--font-family-mono);
   background-color: var(--colorbox-bg);
-  color: contrast-color(fn.oklch-from(colorbox-bg, $l: -0.1));
+  color: fn.color-contrast(colorbox-bg);
 }

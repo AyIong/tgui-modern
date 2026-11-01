@@ -14,7 +14,7 @@
     transparent 0 fn.rem(10px),
     var(--stripes) fn.rem(10px) fn.rem(20px)
   );
-  color: contrast-color(fn.oklch-from(bg-color, $l: -0.1));
+  color: fn.color-contrast();
   box-shadow: var(--shadow-small) var(--shadow-color);
 
   &-icon {

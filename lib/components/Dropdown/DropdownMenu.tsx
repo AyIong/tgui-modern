@@ -5,14 +5,7 @@ import {
   OverlayScrollbarsComponent,
   type OverlayScrollbarsComponentRef,
 } from 'overlayscrollbars-react';
-import {
-  type CSSProperties,
-  useEffect,
-  useImperativeHandle,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
 import { colorClassName } from 'tgui-modern/common/color';
 import { classes } from 'tgui-modern/common/react';
 import { useButton } from 'tgui-modern/hooks/useButton';
@@ -182,7 +175,7 @@ function DropdownMenuEntry(props: DropdownMenuEntryProps & { highlighted?: boole
         selected === value && 'selected',
         highlighted && 'highlighted',
       )}
-      style={{ '--index': index } as CSSProperties}
+      style={{ '--index': index }}
       {...interactions}
     >
       {getOptionDisplayText(option)}

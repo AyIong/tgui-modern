@@ -1,0 +1,104 @@
+@use "@styles/functions" as fn;
+
+.imagebutton {
+  --imagebutton-border-radius: var(--border-radius-2);
+  --imagebutton-bg-color: #{fn.oklch-from(bg-color, $a: 0.2)};
+  // Image
+  --image-margin: var(--space-s);
+  --image-border-width: var(--border-width-1);
+  --image-transition-duration: var(--transition-time-medium);
+  // Content
+  --content-border-width: var(--border-width-1);
+  --content-padding-vertical: var(--space-xs);
+
+  user-select: none;
+  cursor: var(--cursor-pointer);
+  overflow: hidden;
+  position: relative;
+  display: inline-grid;
+  text-align: center;
+  width: calc(var(--image-size) + (var(--image-margin) * 2) + (var(--image-border-width) * 2));
+  background-color: var(--imagebutton-bg-color);
+  border-radius: var(--imagebutton-border-radius);
+  transition: background-color var(--transition-time-medium);
+
+  /* Prevent hover/active effects if hovered/pressed on buttons container */
+  &:not(:has(.imagebutton-buttons:hover), :has(.imagebutton-buttons:active)) {
+    &:hover {
+      --imagebutton-bg-color: #{fn.oklch-from(bg-color, $a: 0.33)};
+      --image-translate: calc(-1 * var(--image-margin));
+    }
+
+    &:active {
+      --image-translate: 0;
+      --image-transition-duration: 0s;
+    }
+  }
+
+  &.disabled {
+    --opacity: var(--opacity-disabled);
+    pointer-events: none;
+  }
+
+  &-inner {
+    display: grid;
+    opacity: var(--opacity, 1);
+    transition: opacity var(--transition-time-medium);
+
+    &--image {
+      display: grid;
+      border: var(--border-width-1) solid var(--imagebutton-bg-color);
+      border-bottom: 0;
+      border-radius: var(--imagebutton-border-radius) var(--imagebutton-border-radius) 0 0;
+
+      img {
+        aspect-ratio: 1;
+        width: var(--image-size);
+        margin: var(--image-margin);
+        // Used pixels cause image sizes in px
+        filter: drop-shadow(0 3px 0 oklch(0 0 0 / 0.5));
+        transform: translateY(var(--image-translate));
+        transition: transform var(--image-transition-duration);
+      }
+    }
+
+    &--content {
+      anchor-name: --imagebutton-content;
+      padding: var(--content-padding-vertical) var(--space-s);
+      background-color: var(--bg-color);
+      color: fn.color-contrast();
+      border-top: var(--content-border-width) solid fn.fg(var(--bg-color));
+      border-bottom: var(--content-border-width) solid transparent;
+      transition: background-color var(--transition-time-medium);
+    }
+  }
+
+  &-buttons {
+    pointer-events: all;
+    position: absolute;
+    position-anchor: --imagebutton-content;
+    bottom: anchor(top);
+    left: var(--image-border-width);
+    display: flex;
+
+    > * {
+      border-radius: 0;
+    }
+
+    &.alternative {
+      --text-shadow-blur: #{fn.rem(1px)};
+      --text-shadow-thickness: #{fn.rem(0.666px)};
+      --text-shadow-color: var(--background-color);
+
+      pointer-events: none;
+      inset: 0 0 auto 0;
+      flex-direction: column;
+      /** Text outline. Sort of. What a mess... */
+      text-shadow:
+        0px var(--text-shadow-thickness) var(--text-shadow-blur) var(--text-shadow-color),
+        calc(-1 * var(--text-shadow-thickness)) 0px var(--text-shadow-blur) var(--text-shadow-color),
+        var(--text-shadow-thickness) 0px var(--text-shadow-blur) var(--text-shadow-color),
+        0px calc(-1 * var(--text-shadow-thickness)) var(--text-shadow-blur) var(--text-shadow-color);
+    }
+  }
+}

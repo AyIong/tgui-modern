@@ -28,5 +28,5 @@
     "useDefineForClassFields": true,
     "types": ["bun", "node"]
   },
-  "include": ["lib", "global.d.ts", "stories", ".storybook/**/*"]
+  "include": ["lib", "global.d.ts", "react.d.ts", "stories", ".storybook/**/*"]
 }

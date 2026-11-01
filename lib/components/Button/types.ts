@@ -17,7 +17,7 @@ export type ButtonInteractionProps = Partial<{
 
 export type ButtonBaseProps = Partial<{
   /** Chages component color palette */
-  color: CssColors;
+  color: CssColors | false;
   /** Fill all available horizontal space */
   fluid: boolean;
   /** Disables button and makes it semi-transparent */

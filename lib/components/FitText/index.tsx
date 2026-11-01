@@ -1,4 +1,4 @@
-import { type CSSProperties, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { getCssVariableValue } from 'tgui-modern/common/css';
 import { classes } from 'tgui-modern/common/react';
 import { unit } from 'tgui-modern/common/ui';
@@ -51,15 +51,13 @@ export function FitText(props: FitTextProps) {
     <div
       ref={containerRef}
       className={classes('fittext', ellipsis && 'ellipsis')}
-      style={
-        {
-          '--font-size-min': unit(minFontSize || '8px'),
-          '--font-size-max': unit(maxFontSize),
-          '--scale': scale,
-        } as CSSProperties
-      }
+      style={{
+        '--font-size-min': unit(minFontSize || '8px'),
+        '--font-size-max': unit(maxFontSize),
+        '--scale': scale,
+      }}
     >
-      <span ref={textRef} className={classes('fittext-content', className)}>
+      <span ref={textRef}>
         {children}
       </span>
     </div>

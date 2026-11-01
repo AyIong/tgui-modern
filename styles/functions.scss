@@ -32,19 +32,19 @@
   @return color.adjust($color, $lightness: -$amount * 1%, $space: hsl);
 }
 
-/* Converts px to em. Relies on the font-size variable. */
+/* Converts px to em. Relies on the font-size-unit variable. */
 @function em($px) {
   $unitless: math.div($px, 1px);
   @return calc($unitless / var(--font-size-unit) * 1em);
 }
 
-/* Converts px to rem. Relies on the font-size variable. */
+/* Converts px to rem. Relies on the font-size-unit variable. */
 @function rem($px) {
   $unitless: math.div($px, 1px);
   @return calc($unitless / var(--font-size-unit) * 1rem);
 }
 
-// Shortcut for relative colors, accept only css variables names
+/* Shortcut for relative colors, accept only css variables names */
 @function oklch-from($variable, $l: 0, $c: 0, $h: 0, $a: null) {
   $l-part: if(sass($l == 0): l; else: calc(l + $l));
   $c-part: if(sass($c == 0): c; else: calc(c + $c));
@@ -52,4 +52,14 @@
   $a-part: if(not sass($a == null): "/ #{$a}");
 
   @return oklch(from var(--#{$variable}) #{$l-part} #{$c-part} #{$h-part} #{$a-part});
+}
+
+/**
+ * Returns white or black color, depends on contrast with passed css
+ * variable color, without `var(--)`
+ * Must by used with css `color` prop, cause it uses css contrast-color()
+ * By default, it uses bg-color, width little shift to darker tone
+ */
+@function color-contrast($color: bg-color, $shift: -0.1) {
+  @return contrast-color(#{oklch-from($color, $l: $shift)});
 }

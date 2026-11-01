@@ -93,11 +93,11 @@ export type StringStyleMap = Partial<{
   /** Sets background color. */
   backgroundColor: string | BooleanLike;
   /** Applies an atomic `color-<name>` class to the element. */
-  color: string;
+  color: string | false;
   /** Opacity, from 0 to 1. */
   opacity: string | BooleanLike;
   /** Sets text color. */
-  textColor: string | BooleanLike;
+  textColor: string | false;
 
   // MARK: Margin
   /** Margin on all sides. */

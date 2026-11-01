@@ -344,7 +344,6 @@ export function getGasFromPath(gasPath: string): Gas | undefined {
 
 // MARK: Colors defined in CSS
 export type CssColors = (typeof CSS_COLORS)[number];
-
 export const CSS_COLORS = [
   'primary',
   'secondary',

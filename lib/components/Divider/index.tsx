@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react';
 import { classes } from 'tgui-modern/common/react';
 
 type Props = Partial<{
@@ -22,7 +21,7 @@ export function Divider(props: Props) {
   return (
     <div
       className={classes('divider', vertical && 'divider-vertical')}
-      style={{ '--size': size } as CSSProperties}
+      style={{ '--size': size }}
     />
   );
 }

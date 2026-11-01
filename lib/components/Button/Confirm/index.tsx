@@ -1,5 +1,5 @@
 import { useLongPress } from '@uidotdev/usehooks';
-import { type CSSProperties, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { classes } from 'tgui-modern/common/react';
 import { ButtonContainer, ButtonContent, renderIcon } from '..';
 import type { ConfirmProps } from './types';
@@ -81,11 +81,9 @@ export function Confirm(props: ConfirmProps) {
   return (
     <ButtonContainer
       className={classes('button-confirm', confirmed && 'confirmed', disabled && 'disabled')}
-      style={
-        {
-          '--confirm-delay': `${confirmDelay || defaultConfirmDelay}ms`,
-        } as CSSProperties
-      }
+      style={{
+        '--confirm-delay': `${confirmDelay || defaultConfirmDelay}ms`,
+      }}
       color={color}
       {...handlePress}
       {...rest}

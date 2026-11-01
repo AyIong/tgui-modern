@@ -41,10 +41,10 @@ body {
   font-variant-numeric: tabular-nums;
   margin: 0;
   padding: 0;
+}
 
-  &:focus-visible {
-    outline: none;
-  }
+:focus-visible {
+  outline: none;
 }
 
 h1,
