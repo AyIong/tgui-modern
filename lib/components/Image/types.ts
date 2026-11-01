@@ -19,3 +19,12 @@ export type ImageProps = Partial<{
   src: string;
 }> &
   BoxProps;
+
+export type RetryState = {
+  /** The src that failed */
+  base: string;
+  /** The url we last put on the element */
+  written: string;
+  /** How many retries this src has had */
+  attempts: number;
+};

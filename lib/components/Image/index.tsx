@@ -1,11 +1,7 @@
 import { computeBoxProps } from '@common/ui';
-import { useEffect, useRef } from 'react';
-import type { ImageProps } from './types';
-
-const maxAttempts = 5;
-const attemptCooldown = 1000;
-const transparentImg =
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
+import { type SyntheticEvent, useEffect, useRef } from 'react';
+import { attemptCooldown, maxAttempts, transparentImg, withAttempt } from './helpers';
+import type { ImageProps, RetryState } from './types';
 
 /**
  * ## Image
@@ -18,7 +14,7 @@ const transparentImg =
 export function Image(props: ImageProps) {
   const { allowBlur, fixErrors, objectFit, src, ...rest } = props;
 
-  const attempts = useRef(0);
+  const retry = useRef<RetryState>(null);
   const timer = useRef<NodeJS.Timeout>(null);
 
   const computedProps = computeBoxProps(rest);
@@ -28,29 +24,61 @@ export function Image(props: ImageProps) {
     objectFit: objectFit || 'fill',
   };
 
-  function clearTimer() {
-    if (timer.current) {
-      clearTimeout(timer.current);
-    }
-  }
+  /** Retries a failed src a second later, up to maxAttempts times, without ever writing over a newer src */
+  function handleError(event: SyntheticEvent<HTMLImageElement>): void {
+    const imgElement = event.currentTarget;
+    const current = imgElement.getAttribute('src') || '';
 
-  function handleError(event: React.SyntheticEvent<HTMLImageElement>): void {
-    if (!fixErrors || attempts.current >= maxAttempts) {
-      clearTimer();
+    let state = retry.current;
+    if (!state || (current !== state.base && current !== state.written)) {
+      if (timer.current) {
+        clearTimeout(timer.current);
+      }
+      timer.current = null;
+      state = { base: current, written: current, attempts: 0 };
+      retry.current = state;
+    }
+
+    if (!fixErrors || state.attempts >= maxAttempts) {
+      if (timer.current) {
+        clearTimeout(timer.current);
+      }
+
+      timer.current = null;
       return;
     }
 
-    const imgElement = event.currentTarget;
+    if (timer.current) {
+      return;
+    }
+
     timer.current = setTimeout(() => {
-      imgElement.src = `${src}?attempt=${attempts.current}`;
-      attempts.current++;
+      timer.current = null;
+      if (imgElement.getAttribute('src') !== state.written) {
+        return;
+      }
+      state.written = withAttempt(state.base, state.attempts);
+      state.attempts++;
+      imgElement.src = state.written;
     }, attemptCooldown);
   }
 
   /** Cleans up any stray timers */
   useEffect(() => {
-    return () => clearTimer();
+    return () => {
+      if (timer.current) {
+        clearTimeout(timer.current);
+      }
+    };
   }, []);
 
-  return <img alt="dm icon" draggable="false" src={src || transparentImg} onError={handleError} {...computedProps} />;
+  return (
+    <img
+      alt="dm icon"
+      draggable="false"
+      src={src || transparentImg}
+      onError={handleError}
+      {...computedProps}
+    />
+  );
 }
