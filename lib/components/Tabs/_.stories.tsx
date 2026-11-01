@@ -67,10 +67,11 @@ export const Categories: Story = {
     const justATab = 'Just a tab';
     const [tab, setTab] = useState(justATab);
     const [vertical, setVertical] = useState(true);
+    const [tabCounts] = useState(() => Array.from({ length: 10 }, () => randomNumber(2, 10)));
 
-    const categories = Array.from({ length: 10 }, (_, categoryIndex) => (
+    const categories = tabCounts.map((count, categoryIndex) => (
       <Tabs.Category name={`Category ${categoryIndex + 1}`} key={`category-${categoryIndex}`}>
-        {Array.from({ length: randomNumber(2, 10) }, (_, tabIndex) => {
+        {Array.from({ length: count }, (_, tabIndex) => {
           const id = `Category: ${categoryIndex} -> Tab:${tabIndex}`;
           return (
             <Tabs.Tab key={id} selected={tab === id} onClick={() => setTab(id)}>
