@@ -40,6 +40,7 @@
 
   &.disabled {
     --opacity: var(--opacity-disabled);
+    --image-filter: contrast(75%);
   }
 
   &-inner {
@@ -60,7 +61,7 @@
         width: var(--image-size);
         color: var(--fg-color);
         // Used pixels cause image sizes in px
-        filter: drop-shadow(0 3px 0 oklch(0 0 0 / 0.5));
+        filter: drop-shadow(0 3px 0 oklch(0 0 0 / 0.5)) var(--image-filter, none);
         transform: var(--image-transform, none);
         transition: transform var(--image-transition-duration);
       }

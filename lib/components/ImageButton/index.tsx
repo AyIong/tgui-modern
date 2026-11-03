@@ -81,9 +81,9 @@ export function ImageButton(props: ImageButtonProps) {
             {children}
           </Content>
         </div>
-        {buttons && <div className="imagebutton-buttons">{buttons}</div>}
-        {buttonsAlt && <div className="imagebutton-buttons alternative">{buttonsAlt}</div>}
       </div>
+      {buttons && <div className="imagebutton-buttons">{buttons}</div>}
+      {buttonsAlt && <div className="imagebutton-buttons alternative">{buttonsAlt}</div>}
     </div>
   );
 
