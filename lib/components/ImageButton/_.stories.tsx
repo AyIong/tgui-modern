@@ -1,11 +1,13 @@
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: <Fuck off> */
 import { type ComponentProps, useState } from 'react';
 import type { Meta, StoryObj } from 'storybook-react-rsbuild';
 import { CSS_COLORS } from 'tgui-modern/common/constants';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
+import { Stack } from '../Stack';
 import { ImageButton } from '.';
 
-const soulFish = <span style={{ color: 'rgba(255, 255, 255, 0.5' }}>SoulFish</span>;
+const soulFish = <span style={{ color: 'rgba(255, 255, 255, 0.5)' }}>SoulFish</span>;
 const soulFishImage =
   'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAIVBMVEXAwMAAAP8AAMwAZv9mMwCZZjMAAAD/mTP/zGb/ADMHBwd3bPqIAAAAAXRSTlMAQObYZgAAAI5JREFUKJFjYBhkQAiNz2iEJiAMEmBxQBIAaXENQOgwBgqwhEJVsKWlJRkbCsAF2NLKy9OSjQ0FVWEC5Rlt5cnGxsKmIVADKjo62oWBAoYwMyo6Z6AKlHd0lAMFlK1cYXrKywuNgQIL4AIMDEpAFauA9iIcthjkMgYXuACTlLKhAornFFctQvUtkyLDgAIAaJcdwdTNoTsAAAAASUVORK5CYII=';
 
@@ -63,9 +65,9 @@ export const FilledDefault: Story = {
 
 export const FilledFluid: Story = {
   args: {
-    base64: soulFishImage,
     fluid: true,
     children: 'ImageButton',
+    base64: soulFishImage,
     tooltip: { content: 'Also, you can Right Click on it', position: 'bottom' },
   },
 
@@ -89,12 +91,12 @@ export const FilledFluid: Story = {
         <ImageButton
           {...args}
           mb={0.5}
-          buttonsAlt={buttons}
+          selected={selected}
           disabled={disabled}
           description="Fluid with buttonsAlt prop. buttonsAlt container has a fixed width that depends on the size of the image"
+          buttonsAlt={buttons}
           onClick={() => setSelected(!selected)}
           onRightClick={() => setDisabled(!disabled)}
-          selected={selected}
         />
         <ImageButton
           {...args}
@@ -203,6 +205,29 @@ export const Colors: Story = {
           </ImageButton>
         ))}
       </>
+    );
+  },
+};
+
+// If that will not render, you have real problems
+export const StressTest: Story = {
+  render: () => {
+    const [selected, setSelected] = useState(false);
+
+    return (
+      <Stack wrap>
+        {Array.from({ length: 1000 }, (_, i) => (
+          <ImageButton
+            key={i}
+            selected={selected}
+            description="There is too many buttons..."
+            base64={soulFishImage}
+            onClick={() => setSelected(!selected)}
+          >
+            Stress test {`${i + 1}`}
+          </ImageButton>
+        ))}
+      </Stack>
     );
   },
 };

@@ -6,6 +6,7 @@ import type { ButtonInteractionProps } from 'tgui-modern/components/Button/types
  * clickable elements, such as buttons.
  */
 type useButtonProps = Partial<{
+  /** Prevents events */
   disabled: boolean;
 }> &
   ButtonInteractionProps;
@@ -42,7 +43,6 @@ export function useButton(props: useButtonProps) {
   }
 
   return {
-    disabled: disabled,
     onClick: handleClick,
     onContextMenu: handleRightClick,
     onKeyDown: handleKeyDown,

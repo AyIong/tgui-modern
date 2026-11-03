@@ -21,7 +21,7 @@ const boxProps = [
 
 const config: StorybookConfig = {
   addons: ['@storybook/addon-docs'],
-  features: { backgrounds: false, interactions: false },
+  features: { backgrounds: false, interactions: false, measure: false, viewport: false },
   framework: {
     name: 'storybook-react-rsbuild',
     options: { strictMode: false },

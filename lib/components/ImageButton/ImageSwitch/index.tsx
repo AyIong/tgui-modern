@@ -1,10 +1,13 @@
 import { classes } from 'tgui-modern/common/react';
 import { DmIcon } from '../../DmIcon';
+import { Icon } from '../../Icon';
 import { Image } from '../../Image';
-import { Fallback } from '../Fallback';
-import type { ImageButtonImagesProps } from './types';
+import type { FallbackProps, ImageButtonImagesProps } from './types';
 
-/** There is too many options to show image... can't we just use unified one? */
+/**
+ * There is too many options to show image... can't we just use unified one?
+ * Priority is: base64 -> imageSrc -> dmIcon -> asset -> question icon
+ */
 export function ImageSwitch(props: ImageButtonImagesProps) {
   const { base64, imageSrc, dmIcon, asset, fallbackIcon } = props;
 
@@ -14,7 +17,7 @@ export function ImageSwitch(props: ImageButtonImagesProps) {
   }
 
   if (dmIcon) {
-    return <DmIcon {...dmIcon} fallback={dmIcon.fallback || <Fallback icon="spinner" spin />} />;
+    return <DmIcon {...dmIcon} fallback={dmIcon.fallback || <Fallback animate icon="toolbox" />} />;
   }
 
   if (asset) {
@@ -22,4 +25,9 @@ export function ImageSwitch(props: ImageButtonImagesProps) {
   }
 
   return <Fallback icon={fallbackIcon || 'question'} />;
+}
+
+function Fallback(props: FallbackProps) {
+  const { icon, animate } = props;
+  return <Icon className="imagebutton-fallback" name={icon} animation={animate && 'bounce'} />;
 }

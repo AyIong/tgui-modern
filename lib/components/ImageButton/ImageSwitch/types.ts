@@ -21,8 +21,12 @@ export type ImageButtonImagesProps = Partial<{
   dmIcon: DmIconProps;
   /** Prop `src` of Image component. Example: `imageSrc={resolveAsset(thing.image)}` */
   imageSrc: string;
-  /** Parameter responsible for the size of the image, component and standard "stubs". */
-  imageSize: number;
   /** Replaces default "question" icon when image missing. */
   fallbackIcon: IconNamesUnion;
+}>;
+
+export type FallbackProps = {
+  icon: IconNamesUnion;
+} & Partial<{
+  animate: true;
 }>;

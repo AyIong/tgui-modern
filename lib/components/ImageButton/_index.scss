@@ -7,15 +7,13 @@
   --imagebutton-border: var(--border-width-1) solid var(--imagebutton-border-color);
   --imagebutton-border-radius: var(--border-radius-2);
   // Image
+  --image-size: 64px; // Default value. Can be overriden with inline style
   --image-margin: var(--space-s);
-  --image-border-width: var(--border-width-1);
   --image-transition-duration: var(--transition-time-medium);
   // Content
   --content-border-width: var(--border-width-1);
   --content-padding-vertical: var(--space-xs);
 
-  user-select: none;
-  cursor: var(--cursor-pointer);
   overflow: hidden;
   position: relative;
   text-align: center;
@@ -24,14 +22,18 @@
   transition: background-color var(--transition-time-medium);
 
   /* Prevent hover/active effects if hovered/pressed on buttons container */
-  &:not(:has(.imagebutton-buttons:hover), :has(.imagebutton-buttons:active)) {
+  &:not(.passive, :has(.imagebutton-buttons:hover), :has(.imagebutton-buttons:active)) {
+    user-select: none;
+    cursor: var(--cursor-pointer);
+
     &:hover {
       --imagebutton-bg-color: #{fn.oklch-from(bg-color, $a: 0.33)};
-      --image-translate: calc(-1 * var(--image-margin));
+      --image-transform: translateY(calc(-1 * var(--image-margin) * 0.75));
     }
 
     &:active {
-      --image-translate: 0;
+      /* biome-ignore lint/complexity/noImportantStyles: <I don't want to duplicate that> */
+      --image-transform: none !important;
       --image-transition-duration: 0s;
     }
   }
@@ -49,12 +51,17 @@
       align-items: center;
       border-radius: var(--imagebutton-border-radius) var(--imagebutton-border-radius) 0 0;
 
-      img {
+      img,
+      .imagebutton-fallback {
         aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: var(--image-size);
+        color: var(--fg-color);
         // Used pixels cause image sizes in px
         filter: drop-shadow(0 3px 0 oklch(0 0 0 / 0.5));
-        transform: translateY(var(--image-translate));
+        transform: var(--image-transform, none);
         transition: transform var(--image-transition-duration);
       }
     }
@@ -72,12 +79,16 @@
       flex-direction: column;
     }
   }
+
+  &-fallback:before {
+    font-size: calc(var(--image-size) * 0.5);
+  }
 }
 
 // MARK: Card
 .imagebutton:not(.fluid) {
   display: inline-grid;
-  width: calc(var(--image-size) + (var(--image-margin) * 2) + (var(--image-border-width) * 2));
+  width: calc(var(--image-size) + (var(--image-margin) * 2) + (var(--content-border-width) * 2));
 
   .imagebutton {
     &-inner {
@@ -87,14 +98,16 @@
         border: var(--imagebutton-border);
         border-bottom: 0;
 
-        img {
+        img,
+        .imagebutton-fallback {
           margin: var(--image-margin);
         }
       }
 
       &--content {
         anchor-name: --imagebutton-content;
-        padding: var(--content-padding-vertical) var(--space-s);
+        contain: inline-size;
+        padding: var(--content-padding-vertical) var(--space-m);
         background-color: var(--bg-color);
         color: fn.color-contrast();
         border-top: var(--content-border-width) solid fn.fg(var(--bg-color));
@@ -110,7 +123,7 @@
       position-anchor: --imagebutton-content;
       position: absolute;
       bottom: anchor(top);
-      left: var(--image-border-width);
+      left: var(--content-border-width);
 
       &.alternative {
         pointer-events: none;
@@ -130,6 +143,9 @@
 
 // MARK: Fluid
 .imagebutton.fluid {
+  /* biome-ignore lint/complexity/noImportantStyles: <Prevent image overflow by transform> */
+  --image-transform: none !important;
+
   display: flex;
   border: var(--imagebutton-border);
 
@@ -158,13 +174,11 @@
     }
 
     &-buttons {
-      --divider-border: var(--border-width-1) solid var(--imagebutton-border-color);
-
       background-color: inherit;
-      border-left: var(--divider-border);
+      border-left: var(--imagebutton-border);
 
       &:not(.alternative) > * {
-        border-left: var(--divider-border);
+        border-left: var(--imagebutton-border);
 
         &:first-child {
           border-left: 0;
@@ -177,7 +191,7 @@
         > * {
           flex: 1;
           justify-content: center;
-          border-top: var(--divider-border);
+          border-top: var(--imagebutton-border);
 
           &:first-child {
             border-top: 0;

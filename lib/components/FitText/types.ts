@@ -1,6 +1,8 @@
+import type { ReactNode } from 'react';
+
 export type FitTextProps = {
   /** Text that will be fitted */
-  children: string | number;
+  children: ReactNode;
 } & Partial<{
   /**
    * Removes line breaks and truncates text when it overflows,

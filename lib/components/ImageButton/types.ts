@@ -9,14 +9,6 @@ export type ImageButtonProps = Omit<ButtonBaseProps, 'variant' | 'innerStyle' | 
   BoxProps;
 
 type ImageButtonCommonProps = Partial<{
-  children: string;
-  /**
-   * Changes the layout of the button, making it fill the entire horizontally available space.
-   * Allows the use of `title`
-   */
-  fluid: boolean;
-  /** Requires `fluid` for work. Adds divider under children and makes it bold. */
-  description: ReactNode;
   /**
    * Special container for buttons.
    * You can put any other component here.
@@ -30,4 +22,18 @@ type ImageButtonCommonProps = Partial<{
    * Can be used with buttons prop.
    */
   buttonsAlt: ReactNode;
+  /** Parameter responsible for the size of the image, component and standard "stubs". */
+  imageSize: number;
+}> &
+  ImageButtonContentProps;
+
+export type ImageButtonContentProps = Partial<{
+  /**
+   * Changes the layout of the button, making it fill the entire horizontally available space.
+   * Allows the use of `title`
+   */
+  fluid: boolean;
+  children: ReactNode;
+  /** Requires `fluid` for work. Adds divider under children and makes it bold. */
+  description: ReactNode;
 }>;

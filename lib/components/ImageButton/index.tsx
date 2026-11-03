@@ -5,14 +5,14 @@ import { useButton } from 'tgui-modern/hooks/useButton';
 import { FitText } from '../FitText';
 import { Tooltip } from '../Tooltip';
 import { ImageSwitch } from './ImageSwitch';
-import type { ImageButtonProps } from './types';
+import type { ImageButtonContentProps, ImageButtonProps } from './types';
 
 /**
  * ## ImageButton
  *
  * Stylized button, with the ability to easily and simply insert any picture into it.
  * - Without image, will be default question icon.
- * - If an image is specified but for some reason cannot be displayed, there will be a spinner fallback until it is loaded.
+ * - If an image is specified but for some reason cannot be displayed, there will be an animated fallback until it is loaded.
  *
  * - [View documentation on tgui core](https://tgstation.github.io/tgui-core/?path=/docs/components-imagebutton--docs)
  * - [View inherited Box props](https://tgstation.github.io/tgui-core/?path=/docs/components-box--docs)
@@ -47,23 +47,6 @@ export function ImageButton(props: ImageButtonProps) {
     onRightClick,
   });
 
-  function renderContent() {
-    if (!children) {
-      return;
-    }
-
-    if (fluid) {
-      return (
-        <>
-          <span className={classes(['title', description && 'has-description'])}>{children}</span>
-          {description && <span className="description">{description}</span>}
-        </>
-      );
-    }
-
-    return <FitText ellipsis>{children}</FitText>;
-  }
-
   let buttonContent = (
     <div tabIndex={-1} className="imagebutton-inner" {...interactions}>
       <div className="imagebutton-inner--image">
@@ -75,16 +58,17 @@ export function ImageButton(props: ImageButtonProps) {
           fallbackIcon={fallbackIcon}
         />
       </div>
-      <div className="imagebutton-inner--content">{renderContent()} </div>
+      <div className="imagebutton-inner--content">
+        <Content fluid={fluid} description={description}>
+          {children}
+        </Content>
+      </div>
     </div>
   );
 
-  if (tooltip) {
-    if (typeof tooltip === 'string') {
-      buttonContent = <Tooltip content={tooltip}>{buttonContent}</Tooltip>;
-    } else {
-      buttonContent = <Tooltip {...tooltip}>{buttonContent}</Tooltip>;
-    }
+  const tooltipProps = typeof tooltip === 'string' ? { content: tooltip } : tooltip;
+  if (tooltipProps) {
+    buttonContent = <Tooltip {...tooltipProps}>{buttonContent}</Tooltip>;
   }
 
   return (
@@ -100,7 +84,7 @@ export function ImageButton(props: ImageButtonProps) {
       ])}
       {...computeBoxProps({
         style: {
-          '--image-size': `${imageSize || 64}px`,
+          '--image-size': imageSize && `${imageSize}px`,
           ...style,
         },
         ...rest,
@@ -111,4 +95,22 @@ export function ImageButton(props: ImageButtonProps) {
       {buttonsAlt && <div className="imagebutton-buttons alternative">{buttonsAlt}</div>}
     </div>
   );
+}
+
+function Content(props: ImageButtonContentProps) {
+  const { fluid, description, children } = props;
+  if (!children) {
+    return; // No children no content. Sounds weird
+  }
+
+  if (fluid) {
+    return (
+      <>
+        <span className={classes(['title', description && 'has-description'])}>{children}</span>
+        {description && <span className="description">{description}</span>}
+      </>
+    );
+  }
+
+  return <FitText ellipsis>{children}</FitText>;
 }
