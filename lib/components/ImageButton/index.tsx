@@ -47,31 +47,7 @@ export function ImageButton(props: ImageButtonProps) {
     onRightClick,
   });
 
-  let buttonContent = (
-    <div tabIndex={-1} className="imagebutton-inner" {...interactions}>
-      <div className="imagebutton-inner--image">
-        <ImageSwitch
-          asset={asset}
-          base64={base64}
-          dmIcon={dmIcon}
-          imageSrc={imageSrc}
-          fallbackIcon={fallbackIcon}
-        />
-      </div>
-      <div className="imagebutton-inner--content">
-        <Content fluid={fluid} description={description}>
-          {children}
-        </Content>
-      </div>
-    </div>
-  );
-
-  const tooltipProps = typeof tooltip === 'string' ? { content: tooltip } : tooltip;
-  if (tooltipProps) {
-    buttonContent = <Tooltip {...tooltipProps}>{buttonContent}</Tooltip>;
-  }
-
-  return (
+  let button = (
     <div
       className={classes([
         'imagebutton',
@@ -90,11 +66,34 @@ export function ImageButton(props: ImageButtonProps) {
         ...rest,
       })}
     >
-      {buttonContent}
-      {buttons && <div className="imagebutton-buttons">{buttons}</div>}
-      {buttonsAlt && <div className="imagebutton-buttons alternative">{buttonsAlt}</div>}
+      <div tabIndex={-1} className="imagebutton-inner" {...interactions}>
+        <div className="imagebutton-inner--image">
+          <ImageSwitch
+            asset={asset}
+            base64={base64}
+            dmIcon={dmIcon}
+            imageSrc={imageSrc}
+            fallbackIcon={fallbackIcon}
+          />
+        </div>
+        <div className="imagebutton-inner--content">
+          <Content fluid={fluid} description={description}>
+            {children}
+          </Content>
+        </div>
+        {buttons && <div className="imagebutton-buttons">{buttons}</div>}
+        {buttonsAlt && <div className="imagebutton-buttons alternative">{buttonsAlt}</div>}
+      </div>
     </div>
   );
+
+  const tooltipProps =
+    typeof tooltip === 'string' ? { content: tooltip, placement: 'bottom' } : tooltip;
+  if (tooltipProps) {
+    button = <Tooltip {...tooltipProps}>{button}</Tooltip>;
+  }
+
+  return button;
 }
 
 function Content(props: ImageButtonContentProps) {
