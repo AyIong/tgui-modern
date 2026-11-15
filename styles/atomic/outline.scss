@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/complexity/noImportantStyles: <Intended override> */
 @use "../colors.scss";
 
 .outline-dotted {
@@ -36,8 +37,7 @@ $map-keys: colors.$color-map !default;
 
 @each $color-name, $color-value in $map-keys {
   .outline-color-#{$color-name} {
-    outline: var(--border-thickness-small)
-      solid
+    outline: var(--border-thickness-small) solid
       hsl(from $color-value h s calc(l + var(--adjust-color))) !important;
   }
 }

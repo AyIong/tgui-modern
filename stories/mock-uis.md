@@ -18,7 +18,7 @@ Example:
 `interfaces/PowerThing/backend.ts`
 
 ```ts
-import { act } from "../act";
+import { act } from '../act';
 // This is a mocked function that just console logs data
 
 const data = {

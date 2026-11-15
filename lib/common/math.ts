@@ -4,14 +4,14 @@ import { getCssVariableValue } from './css';
  * Limits a number to the range between 'min' and 'max'.
  */
 export function clamp(value: number, min: number, max: number): number {
-  return value < min ? min : value > max ? max : value;
+  return value < min ? min : Math.min(value, max);
 }
 
 /**
  * Limits a number between 0 and 1.
  */
 export function clamp01(value: number): number {
-  return value < 0 ? 0 : value > 1 ? 1 : value;
+  return value < 0 ? 0 : Math.min(value, 1);
 }
 
 /**

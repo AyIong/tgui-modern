@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/style/noDescendingSpecificity: <Overrides used for animations> */
 @use "@styles/functions" as fn;
 
 @keyframes toast-countdown {
@@ -147,7 +148,7 @@
 
   // Toast goes away
   &.hidden {
-    --toast-opacity: 0 !important;
+    --toast-opacity: 0;
     transform: translate(50%, calc(var(--toast-offset) * var(--index)));
   }
 }

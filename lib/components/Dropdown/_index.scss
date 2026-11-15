@@ -86,6 +86,7 @@
     }
   }
 
+  /* biome-ignore lint/style/noDescendingSpecificity: <Dropdown position overrides border> */
   &-input {
     padding: var(--space-sm);
     background: fn.oklch-from(bg-color, $a: 0.33);

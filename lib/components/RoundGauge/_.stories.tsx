@@ -56,7 +56,12 @@ function RoundGaugePreview(props: PreviewProps) {
             maxValue={100}
             minValue={0}
             ranges={
-              ranges || { primary: [0, 25], good: [25, 50], average: [50, 75], bad: [75, 100] }
+              ranges || {
+                primary: [0, 25],
+                good: [25, 50],
+                average: [50, 75],
+                bad: [75, 100],
+              }
             }
             size={2.5}
             value={value}

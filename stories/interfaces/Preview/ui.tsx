@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: <Don't care, story> */
 import { Window } from '@stories/window';
 import { useState } from 'react';
 import { Button } from 'tgui-modern/components/Button/index';

@@ -44,9 +44,7 @@
     display: inline-flex;
     align-items: center;
     transform: translateY(50%);
-    transition:
-      transform var(--transition-time-medium),
-      opacity var(--transition-time-medium);
+    transition: transform var(--transition-time-medium), opacity var(--transition-time-medium);
     z-index: 1;
 
     &.visible {

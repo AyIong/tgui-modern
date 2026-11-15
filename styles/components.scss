@@ -21,7 +21,8 @@
   --section-border-radius: var(--border-radius-3);
 
   // MARK: Divider
-  --divider-border: calc(var(--border-width-1) * var(--size, 1)) solid var(--border-color);
+  --divider-border: calc(var(--border-width-1) * var(--size, 1)) solid
+  var(--border-color);
 }
 
 // MARK: OverlayScrollbar

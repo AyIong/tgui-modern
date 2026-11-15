@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: <Don't care> */
 import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from 'storybook-react-rsbuild';
 import { Stack } from '../Stack';

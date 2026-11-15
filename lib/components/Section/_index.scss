@@ -121,13 +121,13 @@
   box-shadow: unset;
 }
 
-.styleable {
+.styleable:not(.section .section) {
   @include reset();
 
-  .left-side,
-  .section-title,
-  .section-content,
-  .section-content-wrapper {
+  > .section-title,
+  > .section-title .left-side,
+  > .section-content-wrapper,
+  > .section-content-wrapper .section-content {
     @include reset();
   }
 }

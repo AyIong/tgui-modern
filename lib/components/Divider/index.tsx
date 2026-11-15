@@ -5,6 +5,8 @@ type Props = Partial<{
   size: number;
   /** Divide content vertically. */
   vertical: boolean;
+  /** Makes divider transparent. */
+  hidden: boolean;
 }>;
 
 /**
@@ -17,10 +19,10 @@ type Props = Partial<{
  * - [View documentation on tgui core](https://tgstation.github.io/tgui-modern/?path=/docs/components-divider--docs)
  */
 export function Divider(props: Props) {
-  const { size, vertical } = props;
+  const { size, vertical, hidden } = props;
   return (
     <div
-      className={classes('divider', vertical && 'divider-vertical')}
+      className={classes('divider', vertical && 'divider-vertical', hidden && 'hidden')}
       style={{ '--size': size }}
     />
   );

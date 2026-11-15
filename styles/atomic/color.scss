@@ -9,6 +9,7 @@ $map-keys: colors.$color-map !default;
 // Foreground colors
 @each $color-name, $color-value in $map-keys {
   .color-#{$color-name} {
+    /* biome-ignore lint/complexity/noImportantStyles: <Must override> */
     color: fn.fg($color-value) !important;
   }
 }
@@ -16,6 +17,7 @@ $map-keys: colors.$color-map !default;
 // Background colors
 @each $color-name, $color-value in $map-keys {
   .color-bg-#{$color-name} {
+    /* biome-ignore lint/complexity/noImportantStyles: <Must override> */
     background-color: fn.bg($color-value) !important;
   }
 }

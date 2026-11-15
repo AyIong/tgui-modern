@@ -4,7 +4,8 @@
 .imagebutton {
   --imagebutton-bg-color: #{fn.oklch-from(bg-color, $a: 0.2)};
   --imagebutton-border-color: #{fn.oklch-from(bg-color, $a: 0.33)};
-  --imagebutton-border: var(--border-width-1) solid var(--imagebutton-border-color);
+  --imagebutton-border: var(--border-width-1) solid
+  var(--imagebutton-border-color);
   --imagebutton-border-radius: var(--border-radius-2);
   // Image
   --image-size: 64px; // Default value. Can be overriden with inline style

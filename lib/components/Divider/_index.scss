@@ -9,7 +9,7 @@
     border-left: var(--divider-border);
   }
 
-  &-hidden {
-    border: none !important;
+  &.hidden {
+    border: none;
   }
 }

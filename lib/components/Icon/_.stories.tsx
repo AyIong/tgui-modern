@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: <Don't care for story> */
 /**
  * Used AI during creation of this story
  * I don't want to waste much time for icons preview/stress-test
@@ -79,10 +78,26 @@ export const Default: Story = {
     const animationIcons = useRandomItems(fasNames);
     const animations = useRandomItems(animationNames);
 
-    const sections: { title: string; refresh: () => void; content: ReactNode }[] = [
-      { title: 'FA Solid', refresh: fas.refresh, content: <RandomIcons icons={fas.items} /> },
-      { title: 'FA Regular', refresh: far.refresh, content: <RandomIcons icons={far.items} /> },
-      { title: 'TGUI Font', refresh: tg.refresh, content: <RandomIcons icons={tg.items} /> },
+    const sections: {
+      title: string;
+      refresh: () => void;
+      content: ReactNode;
+    }[] = [
+      {
+        title: 'FA Solid',
+        refresh: fas.refresh,
+        content: <RandomIcons icons={fas.items} />,
+      },
+      {
+        title: 'FA Regular',
+        refresh: far.refresh,
+        content: <RandomIcons icons={far.items} />,
+      },
+      {
+        title: 'TGUI Font',
+        refresh: tg.refresh,
+        content: <RandomIcons icons={tg.items} />,
+      },
       {
         title: 'Animations',
         refresh: () => {

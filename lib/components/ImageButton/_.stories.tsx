@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: <Fuck off> */
 import { type ComponentProps, useState } from 'react';
 import type { Meta, StoryObj } from 'storybook-react-rsbuild';
 import { CSS_COLORS } from 'tgui-modern/common/constants';
@@ -55,7 +54,10 @@ export const FilledDefault: Story = {
         onClick={() => setSelected(!selected)}
         onRightClick={() => setDisabled(!disabled)}
         selected={selected}
-        tooltip={{ content: 'Also, you can Right Click on it', position: 'bottom' }}
+        tooltip={{
+          content: 'Also, you can Right Click on it',
+          position: 'bottom',
+        }}
       >
         Hover me
       </ImageButton>

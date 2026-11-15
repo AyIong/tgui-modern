@@ -104,7 +104,8 @@
     .knob-ring--fill {
       stroke-dashoffset: 0;
       stroke-dasharray:
-        var(--positive-len), calc(var(--circumference) - var(--positive-len) - var(--negative-len)),
+        var(--positive-len),
+        calc(var(--circumference) - var(--positive-len) - var(--negative-len)),
         var(--negative-len);
       transform: rotate(calc((180 - var(--gap) / 2) * 1deg));
       transform-origin: center;

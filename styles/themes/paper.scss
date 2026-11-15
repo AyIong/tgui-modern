@@ -62,12 +62,10 @@
     padding: 0 6px;
     font-family: Verdana, sans-serif;
     background-color: transparent;
-    color: hsl(0, 0%, 100%);
     color: inherit;
 
     &::placeholder {
       font-style: italic;
-      color: hsl(0, 0%, 47%);
       color: hsla(0, 0%, 100%, 0.45);
     }
   }

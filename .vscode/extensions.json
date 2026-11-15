@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "biomejs.biome",
-    "esbenp.prettier-vscode",
     "vunguyentuan.vscode-css-variables",
     "kevinkyang.auto-comment-blocks"
   ]
