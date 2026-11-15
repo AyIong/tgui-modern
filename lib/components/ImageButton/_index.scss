@@ -129,6 +129,7 @@
       &.alternative {
         pointer-events: none;
         inset: 0 0 auto 0;
+        margin-top: calc(var(--image-margin) * 0.5);
         /** Text outline. Sort of. What a mess... */
         text-shadow:
           0px var(--text-shadow-thickness) var(--text-shadow-blur) var(--text-shadow-color),
