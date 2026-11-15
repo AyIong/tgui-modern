@@ -1,0 +1,47 @@
+name: Publish Release
+
+on:
+  release:
+    types: [published, prereleased]
+
+jobs:
+  release:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Extract version and npm tag
+        id: meta
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/v}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+          if [[ "${{ github.event.release.prerelease }}" == "true" || "$VERSION" == *"-beta"* ]]; then
+            echo "npm_tag=beta" >> $GITHUB_OUTPUT
+          else
+            echo "npm_tag=latest" >> $GITHUB_OUTPUT
+          fi
+
+      # Updates the version in the package.json
+      - name: Set package version
+        run: npm pkg set version="${{ steps.meta.outputs.version }}"
+
+      - name: Build project
+        run: bun build-rslib
+
+      - name: Publish to npm
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: ${{ steps.meta.outputs.npm_tag }}

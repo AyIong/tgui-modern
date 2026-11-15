@@ -5,7 +5,7 @@
   "type": "module",
   "license": "MIT",
   "author": "aylong, jlsnow301, stylemistake",
-  "homepage": "https://github.com/tgstation/tgui-modern",
+  "homepage": "https://github.com/AyIong/tgui-modern",
   "packageManager": "bun@1.4.2",
   "sideEffects": false,
   "scripts": {
